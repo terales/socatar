@@ -1,6 +1,6 @@
 {
   "name": "socatar",
-  "version": "0.0.0",
+  "version": "1",
   "description": "Web service for easily requesting profile photos from several sources",
   "main": "src/index.js",
   "scripts": {
@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "dotenv": "4.0.0",
+    "opbeat": "4.16.0",
     "request": "2.83.0"
   },
   "devDependencies": {
@@ -19,7 +20,7 @@
   },
   "author": "Aleksander Terekhov <terehov.alexander.serg+npm@gmail.com> (https://www.terales.info/)",
   "license": "Proprietary",
-  "private" : true,
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/terales/socatar"

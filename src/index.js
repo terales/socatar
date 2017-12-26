@@ -1,3 +1,5 @@
+const opbeat = require('opbeat').start()
+
 const http = require('http')
 const url = require('url')
 const request = require('request')
@@ -18,9 +20,16 @@ function route (income, outcome) {
 
   if (!source || !sources[source]) { return send404Error(outcome) }
 
+  opbeat.setTransactionName(`/${source}/{id}`)
+  opbeat.setExtraContext({source, user})
+
   Promise.resolve(sources[source](user))
         .then(image => request(image).pipe(outcome))
-        .catch(msg => { throw new Error(msg) })
+        .catch(msg => {
+          const error = new Error(msg)
+          opbeat.captureError(error)
+          throw error
+        })
 }
 
 function parseUrl (raw) {
