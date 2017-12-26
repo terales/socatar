@@ -1,0 +1,20 @@
+{
+  "name": "socatar",
+  "version": "0.0.0",
+  "description": "Web service for easily requesting profile photos from several sources",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "standard"
+  },
+  "dependencies": {
+    "dotenv": "4.0.0",
+    "request": "2.83.0"
+  },
+  "devDependencies": {
+    "standard": "10.0.3"
+  },
+  "author": "Aleksander Terekhov <terehov.alexander.serg+npm@gmail.com> (https://www.terales.info/)",
+  "license": "Proprietary",
+  "private" : true
+}
