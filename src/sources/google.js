@@ -4,7 +4,7 @@ const template = {
   json: true
 }
 
-module.exports = async function getGoogleUrl (id) { // +АлександрТереховСергеевич
+module.exports = async function getGoogleUrl (id) {
   const options = Object.assign({}, template)
   options.url = options.url.replace('{{id}}', id)
 
