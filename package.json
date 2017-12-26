@@ -14,7 +14,14 @@
   "devDependencies": {
     "standard": "10.0.3"
   },
+  "engines": {
+    "node": "8.9.3"
+  },
   "author": "Aleksander Terekhov <terehov.alexander.serg+npm@gmail.com> (https://www.terales.info/)",
   "license": "Proprietary",
-  "private" : true
+  "private" : true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/terales/socatar"
+  }
 }
