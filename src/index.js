@@ -44,11 +44,13 @@ function parseUrl (raw) {
 }
 
 function sendHomePage (response) {
+  opbeat.setTransactionName(`/index.html`)
   response.writeHeader(200, {'Content-Type': 'text/html'})
   return require('fs').createReadStream(path.join(__dirname, 'index.html')).pipe(response)
 }
 
 function sendFavicon (response) {
+  opbeat.setTransactionName('/favicon.ico')
   response.writeHeader(200, {'Content-Type': 'image/x-icon'})
   return require('fs').createReadStream(path.join(__dirname, 'favicon.ico')).pipe(response)
 }
