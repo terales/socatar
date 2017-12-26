@@ -2,5 +2,5 @@ const test = require('ava')
 const validateReceivedImages = require('../validateReceivedImages')
 
 test('loads correct images', t => {
-  return validateReceivedImages('github', t)
+  return validateReceivedImages('google', t)
 })
