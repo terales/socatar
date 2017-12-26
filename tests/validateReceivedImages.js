@@ -11,7 +11,7 @@ module.exports = function validateReceivedImages (source, t) {
   clearDir(receivablesDir)
 
   return Promise.all(fs.readdirSync(samplesDir)
-        .filter(file => file.match(/\.(png|jpg)$/))
+        .filter(file => ['png', 'jpg', 'jpeg'].includes(path.parse(file).ext.slice(1)))
         .map(file =>
             Promise.all([
               getFileHash(samplesDir, file),
@@ -28,7 +28,7 @@ function clearDir (dir) {
 
 function getReceivedHash (receivablesDir, source, file) {
   return new Promise(resolve => {
-    request(`http://localhost:8383/${source}/` + file.slice(0, -4))
+    request(`http://localhost:8383/${source}/` + path.parse(file).name)
         .pipe(fs.createWriteStream(path.join(receivablesDir, file)))
         .on('close', () => resolve(getFileHash(receivablesDir, file)))
   })

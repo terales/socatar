@@ -1,5 +1,6 @@
-const md5 = require('crypto').createHash('md5')
+const crypto = require('crypto')
 
-module.exports = function getGravatarUrl (email) { // terehov.alexander.serg@gmail.com
-  return `http://www.gravatar.com/avatar/${md5.update(email).digest('hex')}?s=100`
+module.exports = function getGravatarUrl (email) {
+  const md5 = crypto.createHash('md5').update(email).digest('hex')
+  return `http://www.gravatar.com/avatar/${md5}?s=100`
 }
