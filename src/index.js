@@ -27,9 +27,21 @@ function route (income, outcome) {
   opbeat.setExtraContext({source, user})
 
   Promise.resolve(sources[source](user))
-        .then(image => request(image).pipe(outcome))
-        .catch(msg => {
-          const error = new Error(msg)
+        .then(url => {
+          const image = request(url)
+          image.on('response', response => {
+            if (response.headers['content-type'].includes('image')) {
+              return image.pipe(outcome)
+            }
+
+            return send404Error(outcome)
+          })
+        })
+        .catch(error => {
+          if (error instanceof Error === false) { error = new Error(error) }
+
+          if (error.message === '404') { return send404Error(outcome) }
+
           opbeat.captureError(error)
           throw error
         })

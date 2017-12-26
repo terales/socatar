@@ -5,10 +5,11 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "test": "standard && ava"
+    "test": "standard --fix && ava"
   },
   "dependencies": {
     "dotenv": "4.0.0",
+    "lodash.get": "4.4.2",
     "opbeat": "4.16.0",
     "request": "2.83.0"
   },

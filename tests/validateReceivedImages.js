@@ -4,7 +4,7 @@ const request = require('request')
 const crypto = require('crypto')
 const rimraf = require('rimraf')
 
-module.exports = function validateReceivedImages (source, t) {
+module.exports = function validateReceivedImages (t, source) {
   const samplesDir = path.join(__dirname, source, 'samples')
   const receivablesDir = path.join(__dirname, source, 'receivables')
 
