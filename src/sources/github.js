@@ -13,7 +13,7 @@ const template = {
 }
 
 module.exports = async function getGitHubUrl (username) { // terales
-  const options = Object.assign({}, template)
+  const options = JSON.parse(JSON.stringify(template))
   options.body.query = options.body.query.replace('{{username}}', username)
 
   return new Promise(resolve => {

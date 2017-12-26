@@ -3,6 +3,7 @@
 
 # Folders to ignore
 node_modules
+receivables
 
 # Numerous always-ignore extensions
 *.diff
