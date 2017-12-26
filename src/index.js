@@ -16,6 +16,9 @@ server.listen({
 }, () => { console.log('Listening at ', server.address()) })
 
 function route (income, outcome) {
+  if (income.url === '/' || income.url === '') { return sendHomePage(outcome) }
+  if (income.url === '/favicon.ico') { return sendFavicon(outcome) }
+
   const {source, user} = parseUrl(income.url)
 
   if (!source || !sources[source]) { return send404Error(outcome) }
@@ -38,6 +41,16 @@ function parseUrl (raw) {
     source: parsed[0],
     user: parsed[1]
   }
+}
+
+function sendHomePage (response) {
+  response.writeHeader(200, {'Content-Type': 'text/html'})
+  return require('fs').createReadStream(path.join(__dirname, 'index.html')).pipe(response)
+}
+
+function sendFavicon (response) {
+  response.writeHeader(200, {'Content-Type': 'image/x-icon'})
+  return require('fs').createReadStream(path.join(__dirname, 'favicon.ico')).pipe(response)
 }
 
 function send404Error (response) {

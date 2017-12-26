@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <title>Get user picture for your page without code</title>
+    <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yegor256/tacit@1.2.5/dist/tacit-css-1.2.5.min.css"/>
+</head>
+
+<body>
+    <section>
+        <article>
+            <h1>Socatar</h1>
+            <p>Web service to use profile photos in your page.</p>
+            
+            <p>
+                Just use link in your HTML:<br>
+                <code>&lt;img src=&quot;https://socatar.com/twitter/yegor256&quot; /&gt;</code>
+            </p>
+            
+            Currently supported sources:
+            <ul>
+                <li><strong>Facebook</strong> with id, like <code>100001584476227</code>: <a href="/facebook/1531296526" target="_blank">/facebook/1531296526</a></li>
+                <li><strong>GitHub</strong> with login, like <code>terales</code>: <a href="/github/yegor256" target="_blank">/github/yegor256</a></li>
+                <li><strong>Google</strong> with Google+ id, like <code>+SriramSaroop</code>: <a href="/google/+SriramSaroop" target="_blank">/google/+SriramSaroop</a></li>
+                <li><strong>Gravatar</strong> with email: <a href="/gravatar/email@example.com" target="_blank">/gravatar/email@example.com</a></li>
+                <li><strong>Twitter</strong> with username, like <code>robwormald</code>: <a href="/twitter/yegor256" target="_blank">/twitter/yegor256</a></li>
+            </ul>
+            
+            <h3>Images will load fast thanks to CDN and browser cache</h3>
+            <p>
+                All images are cached in Cloudflare for about seven days and cached in browser for a year, so after the first load they will load very fast.
+                To update image cache just add anything to query: <code>/facebook/1531296526?v=2</code>
+            </p>
+        </article>
+        <footer><nav><small>
+            Copyright (c) 2017 <a href="https://terales.info/">Oleksandr Terekhov</a><br>
+            Original idea belongs to <a href="https://yegor256.com">Yegor Bugaenko</a><br>
+            Favicon by Icon Depot from the Noun Project
+        </small></nav></footer>
+    </section>
+</body>
+</html>
