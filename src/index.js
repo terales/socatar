@@ -30,6 +30,11 @@ function route (income, outcome) {
         .then(url => {
           const image = request(url)
           image.on('response', response => {
+            if (income.headers['if-none-match'] && income.headers['if-none-match'] === response.headers['etag']) {
+              outcome.writeHead(304)
+              return outcome.end()
+            }
+
             if (response.headers['content-type'].includes('image')) {
               response.headers['cache-control'] = 'public, max-age=1209600, no-transform'
               outcome.writeHead(response.statusCode, response.headers)
