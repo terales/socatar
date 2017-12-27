@@ -4,15 +4,15 @@ const request = require('request')
 const crypto = require('crypto')
 const rimraf = require('rimraf')
 
+const getSourceSamples = require('./getSourceSamples')
+
 module.exports = function validateReceivedImages (t, source) {
   const samplesDir = path.join(__dirname, source, 'samples')
   const receivablesDir = path.join(__dirname, source, 'receivables')
 
   clearDir(receivablesDir)
 
-  return Promise.all(fs.readdirSync(samplesDir)
-        .filter(file => ['png', 'jpg', 'jpeg'].includes(path.parse(file).ext.slice(1)))
-        .map(file =>
+  return Promise.all(getSourceSamples(samplesDir).map(file =>
             Promise.all([
               getFileHash(samplesDir, file),
               getReceivedHash(receivablesDir, source, file)

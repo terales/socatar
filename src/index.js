@@ -31,6 +31,8 @@ function route (income, outcome) {
           const image = request(url)
           image.on('response', response => {
             if (response.headers['content-type'].includes('image')) {
+              response.headers['cache-control'] = 'public, max-age=1209600, no-transform'
+              outcome.writeHead(response.statusCode, response.headers)
               return image.pipe(outcome)
             }
 
