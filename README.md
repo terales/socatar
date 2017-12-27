@@ -23,12 +23,3 @@ https://res.cloudinary.com/demo/image/fetch/w_300,h_300,c_fill,g_face,r_max,f_au
                                                           ask for required image — ↑—————————————————————————————————↑
 ```
 With services like this all images will be cached, cropped with face recognition to dimentions and shape you need, etc.
-
-#### CDN
-
-This service will always ask for a photo from source which could be . Use image hosting like mentioned above for image manipulation and serving.
-
-If you don't mind serving large pictures you can use [Jare.io](http://www.jare.io/) right in your HTML:
-```
-https://cf.jare.io/?u=https://socatar.com/twitter/yegor256
-```
