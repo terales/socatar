@@ -30,7 +30,7 @@ function route (income, outcome) {
         .then(url => {
           const image = request(url)
           image.on('response', response => {
-            if (income.headers['if-none-match'] && income.headers['if-none-match'] === response.headers['etag']) {
+            if (imageIsSameAsCached(income, response)) {
               outcome.writeHead(304)
               return outcome.end()
             }
@@ -52,6 +52,12 @@ function route (income, outcome) {
           opbeat.captureError(error)
           throw error
         })
+}
+
+function imageIsSameAsCached (income, response) {
+  const etag = income.headers['if-none-match'] && income.headers['if-none-match'] === response.headers['etag']
+  const ifModified = income.headers['if-modified-since'] && income.headers['if-modified-since'] === response.headers['last-modified']
+  return etag || ifModified
 }
 
 function parseUrl (raw) {
