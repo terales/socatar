@@ -24,7 +24,11 @@ function route (income, outcome) {
   if (!source || !sources[source]) { return send404Error(outcome) }
 
   opbeat.setTransactionName(`/${source}/{id}`)
-  opbeat.setExtraContext({source, user})
+  opbeat.setExtraContext({
+    source,
+    user,
+    referer: income.headers['referer'] ? income.headers['referer'] : ''
+  })
 
   Promise.resolve(sources[source](user))
         .then(url => {
