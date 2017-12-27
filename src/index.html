@@ -4,7 +4,22 @@
 	<meta charset="utf-8">
     <title>Get user picture for your page without code</title>
     <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yegor256/tacit@1.2.5/dist/tacit-css-1.2.5.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yegor256/tacit@1.2.5/dist/tacit-css-1.2.5.min.css"/>
+    <style>
+        ul { list-style: none; }
+        li { line-height: 40px; }
+
+        .example {
+            display: inline-block;
+            vertical-align: middle;
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin: 0 5px 0 -10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -20,14 +35,29 @@
             
             Currently supported sources:
             <ul>
-                <li><strong>Facebook</strong> with id, like <code>100001584476227</code>: <a href="/facebook/1531296526" target="_blank">/facebook/1531296526</a></li>
-                <li><strong>GitHub</strong> with login, like <code>terales</code>: <a href="/github/yegor256" target="_blank">/github/yegor256</a></li>
-                <li><strong>Google</strong> with Google+ id, like <code>+SriramSaroop</code>: <a href="/google/+SriramSaroop" target="_blank">/google/+SriramSaroop</a></li>
-                <li><strong>Gravatar</strong> with email: <a href="/gravatar/email@example.com" target="_blank">/gravatar/email@example.com</a></li>
-                <li><strong>Twitter</strong> with username, like <code>robwormald</code>: <a href="/twitter/yegor256" target="_blank">/twitter/yegor256</a></li>
+                <li>
+                    <i class="example" style="background-image: url('/facebook/1531296526');"></i>
+                    <strong>Facebook</strong> with id, like <code>100001584476227</code>: <a href="/facebook/1531296526" target="_blank">/facebook/1531296526</a>
+                </li>
+                <li>
+                    <i class="example" style="background-image: url('/github/yegor256');"></i>
+                    <strong>GitHub</strong> with login, like <code>yegor256</code>: <a href="/github/yegor256" target="_blank">/github/yegor256</a>
+                </li>
+                <li>
+                    <i class="example" style="background-image: url('/google/+SriramSaroop');"></i>
+                    <strong>Google</strong> with Google+ id, like <code>+SriramSaroop</code>: <a href="/google/+SriramSaroop" target="_blank">/google/+SriramSaroop</a>
+                </li>
+                <li>
+                    <i class="example" style="background-image: url('/gravatar/email@example.com');"></i>
+                    <strong>Gravatar</strong> with email: <a href="/gravatar/email@example.com" target="_blank">/gravatar/email@example.com</a>
+                </li>
+                <li>
+                    <i class="example" style="background-image: url('/twitter/yegor256');"></i>
+                    <strong>Twitter</strong> with username, like <code>yegor256</code>: <a href="/twitter/yegor256" target="_blank">/twitter/yegor256</a>
+                </li>
             </ul>
             
-            <h3>Images will load fast thanks to CDN and browser cache</h3>
+            <h3>Images load fast thanks to CDN and browser cache</h3>
             <p>
                 All images are cached in Cloudflare and in browser for two weeks, so after the first request they will load very fast.
                 To update image cache just add anything to query: <code>/facebook/1531296526?v=2</code>

@@ -70,13 +70,15 @@ function parseUrl (raw) {
 
 function sendHomePage (response) {
   opbeat.setTransactionName(`/index.html`)
-  response.writeHeader(200, {'Content-Type': 'text/html'})
+  response.setHeader('Content-Type', 'text/html')
+  response.setHeader('Cache-Control', 'public, max-age=3600, no-transform')
   return require('fs').createReadStream(path.join(__dirname, 'index.html')).pipe(response)
 }
 
 function sendFavicon (response) {
   opbeat.setTransactionName('/favicon.ico')
-  response.writeHeader(200, {'Content-Type': 'image/x-icon'})
+  response.setHeader('Content-Type', 'image/x-icon')
+  response.setHeader('Cache-Control', 'public, max-age=1209600, no-transform')
   return require('fs').createReadStream(path.join(__dirname, 'favicon.ico')).pipe(response)
 }
 
