@@ -37,8 +37,11 @@ function getReceivedHash (receivablesDir, source, file) {
 function getFileHash (dir, file) {
   return new Promise(resolve => {
     const hash = crypto.createHash('sha1')
-    const stream = fs.ReadStream(path.join(dir, file))
-    stream.on('data', data => hash.update(data))
-    stream.on('end', () => resolve(hash.digest('hex')))
+    hash.on('readable', () => {
+      const result = hash.read()
+      if (result) { resolve(result.toString('hex')) }
+    })
+
+    fs.ReadStream(path.join(dir, file)).pipe(hash)
   })
 }
