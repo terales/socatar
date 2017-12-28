@@ -5,8 +5,12 @@ cache:
   directories:
     - "node_modules"
 
+before_install:
+  - npm install -g greenkeeper-lockfile@1
+
 before_script:
   - npm i nyc codeclimate-test-reporter coveralls
+  - greenkeeper-lockfile-update
   - npm start &
   - sleep 10s
 
@@ -16,3 +20,4 @@ script:
 after_script:
   -  cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
   - ./node_modules/.bin/codeclimate-test-reporter < coverage/lcov.info
+  - greenkeeper-lockfile-upload
