@@ -5,15 +5,15 @@ cache:
   directories:
     - "node_modules"
 after_install:
-  - npm i nyc codeclimate-test-reporter coveralls -g
+  - npm i nyc codeclimate-test-reporter coveralls
 
 before_script:
   - npm start &
   - sleep 10s
 
 script:
-  - nyc npm test
+  - ./node_modules/.bin/nyc npm test
 
 after_script:
-  - nyc report --reporter=text-lcov | coveralls
-  - codeclimate-test-reporter < coverage/lcov/lcov.info
+  - ./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls
+  - ./node_modules/.bin/codeclimate-test-reporter < coverage/lcov/lcov.info
