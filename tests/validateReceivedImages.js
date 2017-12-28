@@ -14,7 +14,7 @@ module.exports = function validateReceivedImages (t, source) {
 
   return Promise.all(getSourceSamples(samplesDir).map(file =>
             Promise.all([
-              getFileHash(samplesDir, file),
+              getReceivedHash(samplesDir, source, file),
               getReceivedHash(receivablesDir, source, file)
             ]).then(hashes => t.is(hashes[0], hashes[1], file + ' is different'))
         )
