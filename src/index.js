@@ -1,93 +1,88 @@
+// Error tracking
 const opbeat = require('opbeat').start()
 
-const http = require('http')
-const url = require('url')
-const request = require('request')
+// Native Node.js modules
 const path = require('path')
 
+// Third party dependencies
+const express = require('express')
+const request = require('request')
+const safeSet = require('lodash.set')
+
+// Load configuration
 require('dotenv').config()
+
+// Load local modules
 const sources = require(path.join(__dirname, 'sources', 'index'))
 
-const server = http.createServer(route)
-server.listen({
-  host: process.env.HOST,
-  port: process.env.PORT,
-  exclusive: true
-}, () => { console.log('Listening at ', server.address()) })
+// TODO Remove outcome term from file
 
-function route (income, outcome) {
-  if (income.url === '/' || income.url === '') { return sendHomePage(outcome) }
-  if (income.url === '/favicon.ico') { return sendFavicon(outcome) }
+const app = express()
 
-  const {source, user} = parseUrl(income.url)
+app.use(express.static(path.join(__dirname, 'public')))
 
-  if (!source || !sources[source]) { return send404Error(outcome) }
+app.get('/:source/:user', [
+  setLoggerExtraContent,
+  getImageUrl,
+  sendUnmodifiedHeaderIfApplicable,
+  streamImage
+])
 
-  opbeat.setTransactionName(`/${source}/{id}`)
+// Error handlers
+app.use(imageNotFoundHandler)
+app.use(opbeat.middleware.express())
+
+app.listen(process.env.PORT, () => console.log('App listening on port ' + process.env.PORT))
+
+// Middleware
+function setLoggerExtraContent (req, res, next) {
   opbeat.setExtraContext({
-    source,
-    user,
-    referer: income.headers['referer'] ? income.headers['referer'] : ''
+    source: req.params.source,
+    user: req.params.user,
+    referer: req.headers['referer'] ? req.headers['referer'] : ''
   })
+  return next()
+}
 
-  Promise.resolve(sources[source](user))
-        .then(url => {
-          const image = request(url)
-          image.on('response', response => {
-            if (imageIsSameAsCached(income, response)) {
-              outcome.writeHead(304)
-              return outcome.end()
-            }
+function getImageUrl (req, res, next) {
+  Promise.resolve(sources[req.params.source](req.params.user))
+    .then(url => {
+      const image = request(url)
+      image.on('response', response => {
+        safeSet(req, 'locals.source', { request: image, response })
+        return next()
+      })
+    })
+    .catch(err => next(err))
+}
 
-            if (response.headers['content-type'].includes('image')) {
-              response.headers['cache-control'] = 'public, max-age=1209600, no-transform'
-              outcome.writeHead(response.statusCode, response.headers)
-              return image.pipe(outcome)
-            }
+function sendUnmodifiedHeaderIfApplicable (req, res, next) {
+  if (imageIsSameAsCached(req, req.locals.source.response)) {
+    return res.status(304).end()
+  }
 
-            return send404Error(outcome)
-          })
-        })
-        .catch(error => {
-          if (error instanceof Error === false) { error = new Error(error) }
+  next()
+}
 
-          if (error.message === '404') { return send404Error(outcome) }
+function streamImage (req, res, next) {
+  const sourceResponse = req.locals.source.response
+  if (sourceResponse.headers['content-type'].includes('image') === false) { return next() }
 
-          opbeat.captureError(error)
-          throw error
-        })
+  sourceResponse.headers['cache-control'] = 'public, max-age=1209600, no-transform'
+  res.writeHead(sourceResponse.statusCode, sourceResponse.headers)
+  return req.locals.source.request.pipe(res)
+}
+
+function imageNotFoundHandler (err, req, res, next) {
+  if (!res.headersSent && err.message === '404') {
+    return res.status(404).end()
+  }
+
+  return next(err)
 }
 
 function imageIsSameAsCached (income, response) {
   const etag = income.headers['if-none-match'] && income.headers['if-none-match'] === response.headers['etag']
   const ifModified = income.headers['if-modified-since'] && income.headers['if-modified-since'] === response.headers['last-modified']
   return etag || ifModified
-}
-
-function parseUrl (raw) {
-  const parsed = url.parse(raw).pathname.slice(1).split('/')
-  return {
-    source: parsed[0],
-    user: parsed[1]
-  }
-}
-
-function sendHomePage (response) {
-  opbeat.setTransactionName(`/index.html`)
-  response.setHeader('Content-Type', 'text/html')
-  response.setHeader('Cache-Control', 'public, max-age=3600, no-transform')
-  return require('fs').createReadStream(path.join(__dirname, 'index.html')).pipe(response)
-}
-
-function sendFavicon (response) {
-  opbeat.setTransactionName('/favicon.ico')
-  response.setHeader('Content-Type', 'image/x-icon')
-  response.setHeader('Cache-Control', 'public, max-age=1209600, no-transform')
-  return require('fs').createReadStream(path.join(__dirname, 'favicon.ico')).pipe(response)
-}
-
-function send404Error (response) {
-  response.writeHead(404, {'Content-Type': 'text/plain'})
-  response.write('404 Not found')
-  return response.end()
 }
