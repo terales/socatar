@@ -4,10 +4,9 @@ node_js:
 cache:
   directories:
     - "node_modules"
-after_install:
-  - npm i nyc codeclimate-test-reporter coveralls
 
 before_script:
+  - npm i nyc codeclimate-test-reporter coveralls
   - npm start &
   - sleep 10s
 
