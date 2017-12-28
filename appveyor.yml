@@ -1,6 +1,14 @@
 # Test against the latest version of this Node.js version
 environment:
   nodejs_version: "8.9.3"
+  NODE_ENV: test
+  PORT: 8383
+
+# Save CI recourses
+skip_branch_with_pr: true
+clone_depth: 1
+cache: 
+  - node_modules
 
 # Install scripts. (runs after repo cloning)
 install:
@@ -17,8 +25,8 @@ test_script:
 
   # start server
   - cmd.exe /c chcp 65001 > nul & cmd.exe /c  echo npm^ start > server.bat
-  - start server.bat
-  
+  - ps: Start-Process -FilePath "server.bat"
+
   # run tests
   - npm test
 
