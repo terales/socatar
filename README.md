@@ -1,5 +1,7 @@
 ### SOCial avATAR
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/terales/socatar.svg)](https://greenkeeper.io/)
+
 Web service for easily requesting profile photos from several sources:
 ```
 <img src="https://socatar.com/twitter/yegor256" />
