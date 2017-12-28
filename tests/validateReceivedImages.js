@@ -28,17 +28,7 @@ function clearDir (dir) {
 
 function getReceivedHash (receivablesDir, source, file) {
   return new Promise(resolve => {
-    const received = request(`http://localhost:8383/${source}/` + path.parse(file).name)
-    received.on('response', response => {
-      if (response.statusCode > 200) { throw new Error(`${source}/${file} receivable returned non-ok status: ` + response.statusCode) }
-      if (response.headers['content-type'].includes('image') === false) { throw new Error(`${source}/${file} receivable returned non-image content`) }
-      console.log(`${source}/${file}`, response.statusCode, response.headers)
-
-      response
-        .pipe(fs.createWriteStream(path.join(receivablesDir, file)))
-        .on('close', () => resolve(getFileHash(receivablesDir, file)))
-    })
-
+    request(`http://localhost:8383/${source}/` + path.parse(file).name)
         .pipe(fs.createWriteStream(path.join(receivablesDir, file)))
         .on('close', () => resolve(getFileHash(receivablesDir, file)))
   })
