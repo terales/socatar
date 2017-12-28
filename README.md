@@ -1,6 +1,8 @@
 ### SOCial avATAR
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/terales/socatar.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/terales/socatar.svg?branch=master)](https://travis-ci.org/terales/socatar)
+[![codebeat badge](https://codebeat.co/badges/38654554-f04f-4a4a-9424-7d291399928c)](https://codebeat.co/projects/github-com-terales-socatar-master)
+[![Greenkeeper badge](https://david-dm.org/terales/socatar.svg)](https://greenkeeper.io/)
 
 Web service for easily requesting profile photos from several sources:
 ```
