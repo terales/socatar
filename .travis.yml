@@ -15,9 +15,10 @@ before_script:
   - sleep 10s
 
 script:
-  - ./node_modules/.bin/nyc --reporter=text-lcov npm test
+  - ./node_modules/.bin/nyc --check-coverage --lines 70 npm test
 
 after_script:
+  - nyc report --reporter=lcov
   -  cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
   - ./node_modules/.bin/codeclimate-test-reporter < coverage/lcov.info
   - greenkeeper-lockfile-upload
