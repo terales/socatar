@@ -10,7 +10,11 @@ module.exports = function cacheControlHeader (t, source) {
   return new Promise(resolve => {
     const image = request(url)
     image.on('response', response => {
-      t.is(response.headers['cache-control'], 'public, max-age=1209600, no-transform') // cache for 14 days
+      t.is(
+        response.headers['cache-control'],
+        'public, max-age=1209600, no-transform', // cache for 14 days
+        'Headers: ' + JSON.stringify(response.headers, null, true)
+      )
       resolve()
     })
   })

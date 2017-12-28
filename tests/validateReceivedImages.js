@@ -14,7 +14,7 @@ module.exports = function validateReceivedImages (t, source) {
 
   return Promise.all(getSourceSamples(samplesDir).map(file =>
             Promise.all([
-              getReceivedHash(samplesDir, source, file),
+              getFileHash(samplesDir, file),
               getReceivedHash(receivablesDir, source, file)
             ]).then(hashes => t.is(hashes[0], hashes[1], file + ' is different'))
         )
@@ -28,7 +28,16 @@ function clearDir (dir) {
 
 function getReceivedHash (receivablesDir, source, file) {
   return new Promise(resolve => {
-    request(`http://localhost:8383/${source}/` + path.parse(file).name)
+    const received = request(`http://localhost:8383/${source}/` + path.parse(file).name)
+    received.on('response', response => {
+      if (response.statusCode > 200) { throw new Error(`${source}/${file} receivable returned non-ok status: ` + response.statusCode) }
+      if (response.headers['content-type'].includes('image') === false) { throw new Error(`${source}/${file} receivable returned non-image content`) }
+
+      response
+        .pipe(fs.createWriteStream(path.join(receivablesDir, file)))
+        .on('close', () => resolve(getFileHash(receivablesDir, file)))
+    })
+
         .pipe(fs.createWriteStream(path.join(receivablesDir, file)))
         .on('close', () => resolve(getFileHash(receivablesDir, file)))
   })
