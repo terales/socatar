@@ -32,6 +32,7 @@ function getReceivedHash (receivablesDir, source, file) {
     received.on('response', response => {
       if (response.statusCode > 200) { throw new Error(`${source}/${file} receivable returned non-ok status: ` + response.statusCode) }
       if (response.headers['content-type'].includes('image') === false) { throw new Error(`${source}/${file} receivable returned non-image content`) }
+      console.log(`${source}/${file}`, response.statusCode, response.headers)
 
       response
         .pipe(fs.createWriteStream(path.join(receivablesDir, file)))

@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "nodemon src/index.js --watch src/",
-    "test": "standard --fix && ava --serial"
+    "test": "standard --fix && ava --serial --verbose"
   },
   "dependencies": {
     "dotenv": "4.0.0",
