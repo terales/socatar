@@ -9,7 +9,11 @@ const safeSet = require('lodash.set')
 const sources = require(path.join(__dirname, '..', 'sources', 'index'))
 
 module.exports = function getImageUrl (req, res, next) {
-  Promise.resolve(sources[req.params.source](req.params.user))
+  const source = sources[req.params.source]
+
+  if (!source) { throw new Error('404') }
+
+  Promise.resolve(source(req.params.user))
       .then(url => {
         const image = request(url)
         image.on('response', response => {
