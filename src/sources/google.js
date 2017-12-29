@@ -1,20 +1,13 @@
-const request = require('request')
-const getProperty = require('lodash.get')
-const template = {
-  url: `https://www.googleapis.com/plus/v1/people/{{id}}?fields=image/url&key=` + process.env.GOOGLE_KEY,
-  json: true
-}
+// Local modules
+const fetchImageUrlFromSourceJson = require('./../common/fetchImageUrlFromSourceJson')
 
 module.exports = async function getGoogleUrl (id) {
-  const options = Object.assign({}, template)
-  options.url = options.url.replace('{{id}}', id)
+  return fetchImageUrlFromSourceJson(getOptions(id), 'image.url')
+}
 
-  return new Promise((resolve, reject) => {
-    request(options, (error, response, parsedBody) => {
-      if (error) { throw new Error(error) }
-
-      const url = getProperty(parsedBody, 'image.url', '')
-      return url ? resolve(url) : reject(new Error('404'))
-    })
-  })
+function getOptions (id) {
+  return {
+    url: `https://www.googleapis.com/plus/v1/people/${id}?fields=image/url&key=${process.env.GOOGLE_KEY}`,
+    json: true
+  }
 }
