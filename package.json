@@ -18,7 +18,9 @@
   },
   "devDependencies": {
     "ava": "0.24.0",
+    "coveralls": "3.0.0",
     "nodemon": "1.14.6",
+    "nyc": "11.4.1",
     "rimraf": "2.6.2",
     "standard": "10.0.3",
     "supertest": "3.0.0"
