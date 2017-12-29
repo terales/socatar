@@ -1,6 +1,6 @@
 const supertest = require('supertest')
 
-const app = require('./../src/index.js')
+const app = require('./../src/app')
 
 module.exports = async function notFoundImages (t, source) {
   const res = await supertest(app)

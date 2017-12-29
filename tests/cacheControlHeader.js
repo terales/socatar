@@ -1,7 +1,7 @@
 const supertest = require('supertest')
 const path = require('path')
 
-const app = require('./../src/index.js')
+const app = require('./../src/app')
 const getSourceSamples = require('./getSourceSamples')
 
 module.exports = async function cacheControlHeader (t, source) {

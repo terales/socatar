@@ -4,7 +4,7 @@ const supertest = require('supertest')
 const crypto = require('crypto')
 const rimraf = require('rimraf')
 
-const app = require('./../src/index.js')
+const app = require('./../src/app')
 const getSourceSamples = require('./getSourceSamples')
 
 module.exports = function validateReceivedImages (t, source) {

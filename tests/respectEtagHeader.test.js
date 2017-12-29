@@ -1,7 +1,7 @@
 const test = require('ava')
 const supertest = require('supertest')
 
-const app = require('./../src/index.js')
+const app = require('./../src/app')
 
 test('Should not pipe body if there is a matching ETag', async t => {
   const res = await supertest(app)
