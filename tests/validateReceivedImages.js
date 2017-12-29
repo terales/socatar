@@ -1,9 +1,10 @@
 const fs = require('fs')
 const path = require('path')
-const request = require('request')
+const supertest = require('supertest')
 const crypto = require('crypto')
 const rimraf = require('rimraf')
 
+const app = require('./../src/app')
 const getSourceSamples = require('./getSourceSamples')
 
 module.exports = function validateReceivedImages (t, source) {
@@ -28,7 +29,8 @@ function clearDir (dir) {
 
 function getReceivedHash (receivablesDir, source, file) {
   return new Promise(resolve => {
-    request(`http://localhost:8383/${source}/` + path.parse(file).name)
+    supertest(app)
+        .get(`/${source}/` + path.parse(file).name)
         .pipe(fs.createWriteStream(path.join(receivablesDir, file)))
         .on('close', () => resolve(getFileHash(receivablesDir, file)))
   })

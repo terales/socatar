@@ -2,9 +2,10 @@
   "name": "socatar",
   "version": "1.0.0",
   "description": "Web service for easily requesting profile photos from several sources",
-  "main": "src/index.js",
+  "main": "src/server.js",
   "scripts": {
-    "start": "nodemon src/index.js --watch src/",
+    "start": "node src/server.js",
+    "start-dev": "nodemon src/server.js --watch src/",
     "test": "standard --fix && ava --serial"
   },
   "dependencies": {
@@ -19,7 +20,8 @@
     "ava": "0.24.0",
     "nodemon": "1.14.3",
     "rimraf": "2.6.2",
-    "standard": "10.0.3"
+    "standard": "10.0.3",
+    "supertest": "3.0.0"
   },
   "engines": {
     "node": "8.9.3"

@@ -1,17 +1,15 @@
-const request = require('request')
+const supertest = require('supertest')
 const path = require('path')
 
+const app = require('./../src/app')
 const getSourceSamples = require('./getSourceSamples')
 
-module.exports = function cacheControlHeader (t, source) {
+module.exports = async function cacheControlHeader (t, source) {
   const samplesDir = path.join(__dirname, source, 'samples')
-  const url = `http://localhost:8383/${source}/` + path.parse(getSourceSamples(samplesDir)[0]).name
+  const sample = path.parse(getSourceSamples(samplesDir)[0])
 
-  return new Promise(resolve => {
-    const image = request(url)
-    image.on('response', response => {
-      t.is(response.headers['cache-control'], 'public, max-age=1209600, no-transform') // cache for 14 days
-      resolve()
-    })
-  })
+  const res = await supertest(app)
+    .get(`/${source}/${sample.name}`)
+
+  t.is(res.headers['cache-control'], 'public, max-age=1209600, no-transform') // cache for 14 days
 }
