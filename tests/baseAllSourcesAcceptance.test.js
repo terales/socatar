@@ -1,9 +1,9 @@
 const test = require('ava')
 const path = require('path')
 
-const validateReceivedImages = require('./validateReceivedImages')
-const notFoundImages = require('./notFoundImages')
-const cacheControlHeader = require('./cacheControlHeader')
+const validateReceivedImages = require('./macros/validateReceivedImages')
+const notFoundImages = require('./macros/notFoundImages')
+const cacheControlHeader = require('./macros/cacheControlHeader')
 
 const sources = require(path.join(__dirname, '..', 'src', 'sources', 'index'))
 

@@ -4,18 +4,18 @@ const supertest = require('supertest')
 const crypto = require('crypto')
 const rimraf = require('rimraf')
 
-const app = require('./../src/app')
-const getSourceSamples = require('./getSourceSamples')
+const app = require('./../../src/app')
+const getSourceSamples = require('./../helpers/getSourceSamples')
 
 module.exports = function validateReceivedImages (t, source) {
-  const samplesDir = path.join(__dirname, source, 'samples')
-  const receivablesDir = path.join(__dirname, source, 'receivables')
+  const samples = getSourceSamples(source)
+  const receivablesDir = path.join(__dirname, '..', 'sources', source, 'receivables')
 
   clearDir(receivablesDir)
 
-  return Promise.all(getSourceSamples(samplesDir).map(file =>
+  return Promise.all(samples.files.map(file =>
             Promise.all([
-              getFileHash(samplesDir, file),
+              getFileHash(samples.dir, file),
               getReceivedHash(receivablesDir, source, file)
             ]).then(hashes => t.is(hashes[0], hashes[1], file + ' is different'))
         )
