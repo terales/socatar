@@ -1,5 +1,5 @@
 // Error tracking
-const opbeat = require('opbeat').start()
+const opbeat = require('opbeat')
 
 // Native Node.js modules
 const path = require('path')
@@ -15,8 +15,9 @@ require('dotenv').config()
 // Load local modules
 const sources = require(path.join(__dirname, 'sources', 'index'))
 
-// TODO Remove outcome term from file
-
+//
+// Configure app workflow
+//
 const app = express()
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -32,9 +33,11 @@ app.get('/:source/:user', [
 app.use(imageNotFoundHandler)
 app.use(opbeat.middleware.express())
 
-app.listen(process.env.PORT, () => console.log('App listening on port ' + process.env.PORT))
+module.exports = app
 
+//
 // Middleware
+//
 function setLoggerExtraContent (req, res, next) {
   opbeat.setExtraContext({
     source: req.params.source,

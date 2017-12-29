@@ -11,8 +11,6 @@ before_install:
 before_script:
   - npm i nyc codeclimate-test-reporter coveralls
   - greenkeeper-lockfile-update
-  - npm start &
-  - sleep 10s
 
 script:
   - ./node_modules/.bin/nyc --check-coverage --lines 70 npm test
