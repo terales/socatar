@@ -9,7 +9,6 @@ before_install:
   - npm install -g greenkeeper-lockfile@1
 
 before_script:
-  - npm i nyc coveralls
   - greenkeeper-lockfile-update
 
 script:
