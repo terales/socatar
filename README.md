@@ -13,7 +13,7 @@ Web service for easily requesting profile photos from several sources:
 Currently supported sources:
 * Facebook with id, like `100001584476227`
 * GitHub with login, like `terales`
-* Google with Google+ id, like `+SriramSaroop`
+* Google with Google+ id, like `+SriramSaroop` OR gmail address
 * Gravatar with email
 * Twitter with username, like `robwormald`
 

@@ -9,11 +9,10 @@ before_install:
   - npm install -g greenkeeper-lockfile@1
 
 before_script:
-  - npm i nyc coveralls
   - greenkeeper-lockfile-update
 
 script:
-  - ./node_modules/.bin/nyc --check-coverage --lines 90 npm test
+  - ./node_modules/.bin/nyc --check-coverage --lines 90 npm test --serial
 
 after_script:
   - ./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls

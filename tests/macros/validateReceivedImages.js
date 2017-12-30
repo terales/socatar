@@ -1,9 +1,15 @@
+// Native Node.js modules
 const fs = require('fs')
 const path = require('path')
-const supertest = require('supertest')
-const crypto = require('crypto')
-const rimraf = require('rimraf')
+const promisify = require('util').promisify
 
+// Third party dependencies
+const supertest = require('supertest')
+const rimraf = require('rimraf')
+const pixelmatch = require('pixelmatch')
+const jpegParser = require('jpeg-js')
+
+// Local modules
 const app = require('./../../src/app')
 const getSourceSamples = require('./../helpers/getSourceSamples')
 
@@ -15,9 +21,14 @@ module.exports = function validateReceivedImages (t, source) {
 
   return Promise.all(samples.files.map(file =>
             Promise.all([
-              getFileHash(samples.dir, file),
-              getReceivedHash(receivablesDir, source, file)
-            ]).then(hashes => t.is(hashes[0], hashes[1], file + ' is different'))
+              path.join(samples.dir, file),
+              getReceivedImage(receivablesDir, source, file)
+            ]).then(images => {
+              const sample = parseImage(images[0])
+              const received = parseImage(images[1])
+              const diff = pixelmatch(sample, received, null, sample.width, sample.height)
+              t.is(diff, 0, file + ' is different')
+            })
         )
     )
 }
@@ -27,23 +38,18 @@ function clearDir (dir) {
   fs.mkdirSync(dir)
 }
 
-function getReceivedHash (receivablesDir, source, file) {
+function getReceivedImage (receivablesDir, source, file) {
   return new Promise(resolve => {
     supertest(app)
         .get(`/${source}/` + path.parse(file).name)
         .pipe(fs.createWriteStream(path.join(receivablesDir, file)))
-        .on('close', () => resolve(getFileHash(receivablesDir, file)))
+        .on('finish', () => resolve(path.join(receivablesDir, file)))
   })
 }
 
-function getFileHash (dir, file) {
-  return new Promise(resolve => {
-    const hash = crypto.createHash('sha1')
-    hash.on('readable', () => {
-      const result = hash.read()
-      if (result) { resolve(result.toString('hex')) }
-    })
-
-    fs.ReadStream(path.join(dir, file)).pipe(hash)
-  })
+async function parseImage (file) {
+  return jpegParser.decode(
+    await promisify(fs.readFile)(file),
+    true
+  )
 }
