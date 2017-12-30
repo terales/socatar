@@ -21,6 +21,7 @@ app.get('/:source/:user', [
   requireLocalMiddleware('setLoggerExtraContent'),
   requireLocalMiddleware('getImageUrl'),
   requireLocalMiddleware('sendUnmodifiedHeaderIfApplicable'),
+  requireLocalMiddleware('filterNotFoundImages'),
   requireLocalMiddleware('streamImage')
 ])
 
