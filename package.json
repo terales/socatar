@@ -15,7 +15,8 @@
     "lodash.get": "4.4.2",
     "lodash.set": "4.3.2",
     "opbeat": "4.16.0",
-    "request": "2.83.0"
+    "request": "2.83.0",
+    "streamsearch": "0.1.2"
   },
   "devDependencies": {
     "ava": "0.24.0",
