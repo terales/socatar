@@ -29,17 +29,17 @@ async function fetchFromSlug (slug) {
 
 function getSearcher (onMatch) {
   const needle = '"fb://profile/'
-  const pattern = /"fb:\/\/profile\/([0-9]+)"/
-
   const search = new StreamSearch(needle)
-  search.on('info', function (isMatch, data, start, end) {
-    if (isMatch && data) {
-      const body = data.toString('utf8')
-      const match = body.match(pattern)
-      if (match && match[1]) {
-        return onMatch(parseInt(match[1]))
-      }
-    }
+  search.on('info', (isMatch, data) => {
+    if (isMatch && data) { getIdFromHtml(data.toString('utf8'), onMatch) }
   })
   return search
+}
+
+function getIdFromHtml (html, cb) {
+  const pattern = /"fb:\/\/profile\/([0-9]+)"/
+  const match = html.match(pattern)
+  if (match && match[1]) {
+    return cb(parseInt(match[1]))
+  }
 }
