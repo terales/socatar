@@ -6,8 +6,10 @@
     <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yegor256/tacit@1.2.5/dist/tacit-css-1.2.5.min.css"/>
     <style>
-        ul { list-style: none; margin-left: 44px; }
-        li { line-height: 25px; margin-bottom: 1em; }
+        img { vertical-align: text-bottom; }
+
+        .examples { list-style: none; margin-left: 44px; }
+        .examples li { line-height: 25px; margin-bottom: 1em; }
 
         .example {
             display: inline-block;
@@ -25,8 +27,8 @@
 <body>
     <section>
         <article>
-            <h1>Socatar</h1>
-            <p>Web service to use profile photos in your page.</p>
+            <h1 style="margin-top: 0.5em;">Socatar</h1>
+            <p>Web service to simple use profile photos on your page.</p>
             
             <p>
                 Just use link in your HTML:<br>
@@ -34,7 +36,7 @@
             </p>
             
             <div style="margin-bottom: 0.6em;">Currently supported sources:</div>
-            <ul>
+            <ul class="examples">
                 <li>
                     <i class="example" style="background-image: url('/facebook/1531296526');"></i>
                     <strong>Facebook</strong> with id, like <code>100001584476227</code>: <a href="/facebook/1531296526" target="_blank">/facebook/1531296526</a>
@@ -62,23 +64,37 @@
                     Automatically fallback to good enough placeholder image
                 </li>
             </ul>
-            
+
             <h3>Images load fast thanks to CDN and browser cache</h3>
             <p>
-                All images are cached in Cloudflare and in browser for two weeks, so after the first request they will load very fast.
+                All images are cached in Cloudflare and in a browser for two weeks, so after the first request, they will load very fast.
                 To update image cache just add anything to query: <code>/facebook/1531296526?v=2</code>
             </p>
 
-            <h3>Bugs or suggestions?</h3>
+            <h3>Can I trust Socatar.com?</h3>
+            <p>Socatar.com is a web service to simply retrieve user profile images when you received credentials from them. It's owned and managed by <a href="https://github.com/terales/socatar/issues">Oleksandr Terekhov (terales)</a>. As a user of the Socatar.com you are responsible for it's fair use.</p>
+            <p>All current services will always be free of charge as is and without any legal liabilities. The managed solution with an SLA and additional features will be provided in the nearest future.</p>
+
+            There are several policies ensuring that Socatar.com could be trusted:
+            <ul>
+                <li>Uptime is monitored by <a href="http://www.sixnines.io/">Sixnines.io</a> <a href="http://www.sixnines.io/h/28f4"><img src="https://www.sixnines.io/b/28f4"/></a></li>
+                <li>Codebase is 
+                    tested <a href="https://coveralls.io/github/terales/socatar?branch=master"><img src="https://coveralls.io/repos/github/terales/socatar/badge.svg?branch=master"/></a>
+                    and statically analyzed <a href="https://www.codacy.com/app/terehov-alexander-serg/socatar?utm_source=socatar.com&utm_medium=referral&utm_content=terales/socatar&utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/711f81f048434d198fda6118922048ce"/></a></li>
+                <li><a href="https://travis-ci.org/terales/socatar/builds">System tests run daily at Travis CI</a> to ensure that everything is working well with externals</li>
+                <li><a href="https://github.com/terales/socatar">All sources are open</a>, so you can audit them or spin up a local instance</li>
+                <li>Infrastructure from an industry trusted providers: <a href="https://www.heroku.com/home">hosted by Heroku</a>, <a href="https://www.cloudflare.com/">DNS and CDN are from Cloudflare</a>.</li>
+            </ul>
+
+            <h3>Having troubles or suggestions?</h3>
             <p>
-                Please, report any bugs in the GitHub bug tracker:<br>
+                Please, report anything in the GitHub bug tracker:<br>
                 <a href="https://github.com/terales/socatar-bugtracker/issues" target="_blank">https://github.com/terales/socatar-bugtracker/issues</a>
             </p>
         </article>
         <footer><nav><small>
             Copyright (c) 2017 <a href="https://terales.info/">Oleksandr Terekhov</a><br>
             Original idea belongs to <a href="https://yegor256.com">Yegor Bugaenko</a><br>
-            Favicon by Icon Depot from the Noun Project
         </small></nav></footer>
     </section>
 </body>
