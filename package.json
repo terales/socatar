@@ -23,7 +23,7 @@
     "codacy-coverage": "2.0.3",
     "coveralls": "3.0.0",
     "jpeg-js": "0.3.3",
-    "nodemon": "1.14.6",
+    "nodemon": "1.14.7",
     "nyc": "11.4.1",
     "pixelmatch": "4.0.2",
     "rimraf": "2.6.2",
