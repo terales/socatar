@@ -1,6 +1,10 @@
-### [Socatar](https://socatar.com/)
+### [Socatar.com](https://socatar.com/)
 
-Web service for easily use profile photos on your web page:
+Web service for easily use profile photos on your web page.
+
+You don't need to maintain same implementations for getting user pictures in your projects, just generate URL and you will get a CDN-powered credential management free user profile picture.
+
+Use in HTML:
 ```html
 <img src="https://socatar.com/twitter/yegor256" />
 ```
@@ -14,7 +18,7 @@ curl https://socatar.com/github/terales -o terales.jpg
 Invoke-WebRequest https://socatar.com/github/terales -OutFile "$([Environment]::GetFolderPath("Desktop"))\terales.jpg"
 ```
 
-You don't need to maintain same implementations for getting user pictures in your projects, just generate url and you will get a CDN-powered credential management free user profile picture.
+### Content 
 
 * [Currently supported sources](#currently-supported-sources)
 * [Getting help](#getting-help)
@@ -24,11 +28,10 @@ You don't need to maintain same implementations for getting user pictures in you
 Uptime: [![Uptime](http://www.sixnines.io/b/28f4)](http://www.sixnines.io/h/28f4)
 [![Build Status](https://travis-ci.org/terales/socatar.svg?branch=master)](https://travis-ci.org/terales/socatar)
 [![Coverage Status](https://coveralls.io/repos/github/terales/socatar/badge.svg?branch=master)](https://coveralls.io/github/terales/socatar?branch=master)
-(https://standardjs.com)
 [![Greenkeeper badge](https://david-dm.org/terales/socatar.svg)](https://greenkeeper.io/)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/711f81f048434d198fda6118922048ce)](https://www.codacy.com/app/terehov-alexander-serg/socatar?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=terales/socatar&amp;utm_campaign=Badge_Grade)
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 
 ### Currently supported sources
@@ -41,27 +44,27 @@ Uptime: [![Uptime](http://www.sixnines.io/b/28f4)](http://www.sixnines.io/h/28f4
 
 ### Getting help
 
-Please, report anything in the GitHub issues: https://github.com/terales/socatar/issues.
+Please, report anything via the GitHub issues: https://github.com/terales/socatar/issues.
 
 Business opportunities, security issues and any violations should be emailed to socatar.com@gmail.com.
 
 Technical questions about service usage or configuration should be asked on StackOverflow
-and link to the question send to socatar.com@gmail.com.
+and link to the question should be sent to socatar.com@gmail.com.
 
 ### How you can help
 
-* use this project and [say thanks with your feedback](https://saythanks.io/to/terales),
-* fix any mispellings or typos in the home page, readme and other files,
-* make security or perfomance audit and create an issue or PR with improvement,
+* use this project and [give a feedback](https://saythanks.io/to/terales),
+* fix any misspellings or typos on the home page, readme and other files,
+* make security or performance audit and create an issue or PR with improvement,
 * [add new sources for images](CONTRIBUTING.md#add-a-new-source),
-* dive into [help wanted issues](https://github.com/terales/socatar/labels/help%20wanted).
+* dive into [help-wanted issues](https://github.com/terales/socatar/labels/help%20wanted).
 
-This project runs on Node.js and have a good suport for newcommers thanks to (JavaScript Standard Style)[https://standardjs.com/] automatic code style fixes and a decent test coverage.
+This project runs on Node.js and has a good support for newcomers thanks to (JavaScript Standard Style)[https://standardjs.com/] automatic code style fixes and a decent test coverage.
 
 Please, refer to [contributing guideline](CONTRIBUTING.md) for environment setup and recommended workflow.
 
 ### Project details
 
-This project is licensed under the MIT License — [see the licanse file for details](LICENSE.md)
+This project is licensed under the MIT License — [see the license file for details](LICENSE)
 
-Created by [Oleksandr Terekhov](https://terales.info/). Original idea belongs to [Yegor Bugaenko](https://yegor256.com/).
+Created by [Oleksandr Terekhov](https://terales.info/). The original idea belongs to [Yegor Bugaenko](http://yegor256.com/).
