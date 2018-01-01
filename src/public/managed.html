@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- TODO Describe managed benefits and how to apply for it -->
+	<meta charset="utf-8">
+    <title>Get user picture for your page without code</title>
+    <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yegor256/tacit@1.2.5/dist/tacit-css-1.2.5.min.css"/>
+    <style>
+        img { vertical-align: text-bottom; }
+
+        .examples { list-style: none; margin-left: 44px; }
+        .examples li { line-height: 25px; margin-bottom: 1em; }
+
+        .example {
+            display: inline-block;
+            vertical-align: middle;
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin: 0 5px 0 -41px;
+        }
+
+        .highlight td { border-bottom: 0; }
+    </style>
+</head>
+
+<body>
+    <section>
+        <article>
+            <h1 style="margin-top: 0.5em;">Socatar Managed</h1>
+            <p>Web service to simple use profile photos on your page.</p>
+            
+            <p>
+                Just use link in your HTML:<br>
+                <code>&lt;img src=&quot;https://socatar.com/twitter/yegor256&quot; /&gt;</code>
+            </p>
+
+            You can use it from command line or code too:
+            <script src="https://gist.github.com/terales/e1d2c76999ddf62694b5f31cead318c8.js"></script>
+
+            <h3 style="margin-bottom: 0.6em;">Currently supported sources</h3>
+            <ul class="examples">
+                <li>
+                    <i class="example" style="background-image: url('/facebook/1531296526');"></i>
+                    <strong>Facebook</strong> with id, like <code>100001584476227</code>: <a href="/facebook/1531296526" target="_blank">/facebook/1531296526</a>
+                        <br>with profile slug like <code>yegor256</code>: <a href="/facebook/yegor256" target="_blank">/facebook/yegor256</a>
+                </li>
+                <li>
+                    <i class="example" style="background-image: url('/github/yegor256');"></i>
+                    <strong>GitHub</strong> with login, like <code>yegor256</code>: <a href="/github/yegor256" target="_blank">/github/yegor256</a>
+                </li>
+                <li>
+                    <i class="example" style="background-image: url('/google/+SriramSaroop');"></i>
+                    <strong>Google</strong> with Google+ id, like <code>+SriramSaroop</code>: <a href="/google/+SriramSaroop" target="_blank">/google/+SriramSaroop</a>
+                        <br>with GMail address, like <code>email@gmail.com</code>: <a href="/google/terehov.alexander.serg@gmail.com" target="_blank">/google/email@gmail.com</a>
+                </li>
+                <li>
+                    <i class="example" style="background-image: url('/gravatar/terehov.alexander.serg@gmail.com');"></i>
+                    <strong>Gravatar</strong> with email: <a href="/gravatar/terehov.alexander.serg@gmail.com" target="_blank">/gravatar/email@example.com</a>
+                </li>
+                <li>
+                    <i class="example" style="background-image: url('/twitter/yegor256');"></i>
+                    <strong>Twitter</strong> with username, like <code>yegor256</code>: <a href="/twitter/yegor256" target="_blank">/twitter/yegor256</a>
+                </li>
+                <li>
+                    <i class="example" style="background-image: url('/fallback/image');"></i>
+                    Automatically fallback to good enough placeholder image
+                </li>
+            </ul>
+
+            <h3>Images load fast thanks to CDN and browser cache</h3>
+            <p>
+                All images are cached in Cloudflare and in a browser for two weeks, so after the first request, they will load very fast.
+                To update image cache just add anything to query: <code>/facebook/1531296526?v=2</code>
+            </p>
+
+            <h3>Can I trust Socatar.com?</h3>
+            <p>Socatar.com is a web service to simply retrieve user profile images when you received credentials from them. It's owned and managed by <a href="mailto:socatar.com@gmail.com">Oleksandr Terekhov (terales)</a>. As a user of the Socatar.com, you are responsible for its fair use.</p>
+            <p>All current services will always be free of charge as is and without any legal liabilities. The managed solution with an SLA and additional features will be provided in the nearest future.</p>
+
+            There are several policies ensuring that Socatar.com could be trusted:
+            <ul>
+                <li>Uptime is monitored by <a href="http://www.sixnines.io/">Sixnines.io</a> <a href="http://www.sixnines.io/h/28f4"><img src="https://www.sixnines.io/b/28f4"/></a></li>
+                <li>Codebase is 
+                    tested <a href="https://coveralls.io/github/terales/socatar?branch=master"><img src="https://coveralls.io/repos/github/terales/socatar/badge.svg?branch=master"/></a>
+                    and statically analyzed <a href="https://www.codacy.com/app/terehov-alexander-serg/socatar?utm_source=socatar.com&utm_medium=referral&utm_content=terales/socatar&utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/711f81f048434d198fda6118922048ce"/></a></li>
+                <li><a href="https://travis-ci.org/terales/socatar/builds">System tests run daily at Travis CI</a> to ensure that everything is working well with externals</li>
+                <li><a href="https://github.com/terales/socatar">All sources are open</a>, so you can audit them or spin up a local instance</li>
+                <li>Infrastructure from an industry trusted providers: <a href="https://www.heroku.com/home">hosted by Heroku</a>, <a href="https://www.cloudflare.com/">DNS and CDN are from Cloudflare</a>.</li>
+            </ul>
+
+            <h3>Having troubles or suggestions?</h3>
+            <p>
+                Please, report anything in the GitHub bug tracker:<br>
+                <a href="https://github.com/terales/socatar/issues" target="_blank">https://github.com/terales/socatar/issues</a>
+            </p>
+
+            <p>Business opportunities, security issues and any violations should be emailed to <a href="mailto:socatar.com@gmail.com">socatar.com@gmail.com</a></p>
+
+            <p>
+                Technical questions about service usage or configuration should be asked on StackOverflow
+                and link to the question should be sent to <a href="mailto:socatar.com@gmail.com">socatar.com@gmail.com</a>.
+                <br>If you have the question, then someone else may have it too.
+                Working with questions on StackOverflow benefits the whole industry, let's handle them there!
+            </p>
+        </article>
+        <footer><nav><small>
+            Copyright (c) 2017 <a href="https://terales.info/">Oleksandr Terekhov</a><br>
+            The original idea belongs to <a href="https://yegor256.com">Yegor Bugaenko</a><br>
+        </small></nav></footer>
+    </section>
+</body>
+</html>
