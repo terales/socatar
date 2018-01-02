@@ -19,7 +19,6 @@ app.use(express.static(path.join(__dirname, 'public'), {
   index: process.env.TIER === 'managed' ? 'managed.html' : 'index.html'
 }))
 
-
 const workflow = []
 
 if (process.env.TIER === 'managed') {
@@ -34,7 +33,6 @@ if (process.env.TIER === 'managed') {
   workflow.push(requireLocalMiddleware('filterNotFoundImages'))
   workflow.push(requireLocalMiddleware('streamImage'))
 }
-
 
 app.get('/:source/:user', workflow)
 
