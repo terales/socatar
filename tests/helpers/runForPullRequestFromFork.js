@@ -1,6 +1,8 @@
 
 module.exports = function runForPullRequestFromFork (source) {
-  return !process.env.TRAVIS_PULL_REQUEST ||
-    process.env.TRAVIS_PULL_REQUEST === 'false' ||
-    ['google', 'github'].includes(source) === false
+  if (source === 'google' && !process.env.GOOGLE_KEY) { return false }
+
+  if (source === 'github' && !process.env.GITHUB_TOKEN) { return false }
+
+  return true
 }
