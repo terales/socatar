@@ -11,10 +11,14 @@ const notFoundImages = require('./macros/notFoundImages')
 const cacheControlHeader = require('./macros/cacheControlHeader')
 
 // Test helpers
-const filterOurSourcesWithSecureCredentials = require('./helpers/filterOurSourcesWithSecureCredentials')
+const runForPullRequestFromFork = require('./helpers/runForPullRequestFromFork')
 
 Object.keys(sources)
-  .filter(source => filterOurSourcesWithSecureCredentials(source))
+  .filter(source => {
+    const run = runForPullRequestFromFork(source)
+    if (!run) { console.log(source + `: skipped base test suite on CI for pull request from fork because it requires secure evironment variables to pass`) }
+    return run
+  })
   .forEach(source => {
     test(source + ':validateReceivedImages', validateReceivedImages, source)
     test(source + ':cacheControlHeader', cacheControlHeader, source)
