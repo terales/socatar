@@ -18,7 +18,7 @@ curl https://socatar.com/github/terales -o terales.jpg
 Invoke-WebRequest https://socatar.com/github/terales -OutFile "$([Environment]::GetFolderPath("Desktop"))\terales.jpg"
 ```
 
-### Content 
+### Content
 
 * [Currently supported sources](#currently-supported-sources)
 * [Getting help](#getting-help)
@@ -67,4 +67,4 @@ Please, refer to [contributing guideline](CONTRIBUTING.md) for environment setup
 
 This project is licensed under the MIT License — [see the license file for details](LICENSE)
 
-Created by [Oleksandr Terekhov](https://terales.info/). The original idea belongs to [Yegor Bugaenko](http://yegor256.com/).
+Created by [Oleksandr Terekhov](https://terales.info/). The original idea belongs to [Yegor Bugayenko](http://www.yegor256.com/).
