@@ -15,7 +15,7 @@ module.exports = async function notFoundImages (t, source) {
     .redirects(1)
 
   if (res.redirects.length > 0) {
-    // We have response from Cloudinary
+    // We have 404 from Cloudinary
     const fallback = path.join(__dirname, 'fallback.png')
     t.true(res.headers['x-cld-error'].startsWith('Resource not found'))
     t.deepEqual(res.body, await promisify(fs.readFile)(fallback))
