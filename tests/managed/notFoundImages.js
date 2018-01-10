@@ -7,7 +7,7 @@ const fs = require('fs')
 const supertest = require('supertest')
 
 // Local modules
-const app = require('./../../src/app')
+const app = require('./../../src/app')('managed')
 
 module.exports = async function notFoundImages (t, source) {
   const res = await supertest(app)

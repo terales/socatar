@@ -7,7 +7,7 @@ const fs = require('fs')
 const supertest = require('supertest')
 
 // Local modules
-const app = require('./../../src/app')
+const app = require('./../../src/app')('community')
 const fallback = path.join(__dirname, '..', '..', 'src', 'public', 'fallback.svg')
 
 module.exports = async function notFoundImages (t, source) {

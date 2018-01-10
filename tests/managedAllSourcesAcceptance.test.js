@@ -1,6 +1,3 @@
-// Switch to a managed tier
-process.env.TIER = 'managed'
-
 // Third party dependencies
 const test = require('ava')
 const path = require('path')

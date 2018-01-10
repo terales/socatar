@@ -1,7 +1,7 @@
 const test = require('ava')
 const supertest = require('supertest')
 
-const app = require('./../src/app')
+const app = require('./../src/app')('community')
 
 // Test helpers
 const testRunner = require('./helpers/runForPullRequestFromFork')('google') ? test : test.skip

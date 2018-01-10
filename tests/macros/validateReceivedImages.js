@@ -10,7 +10,7 @@ const pixelmatch = require('pixelmatch')
 const jpegParser = require('jpeg-js')
 
 // Local modules
-const app = require('./../../src/app')
+const app = require('./../../src/app')('community')
 const getSourceSamples = require('./../helpers/getSourceSamples')
 
 module.exports = function validateReceivedImages (t, source) {

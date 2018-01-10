@@ -11,7 +11,7 @@ const jpegParser = require('jpeg-js')
 const PngParser = require('pngjs').PNG
 
 // Local modules
-const app = require('./../../src/app')
+const app = require('./../../src/app')('managed')
 const getSourceSamples = require('./../helpers/getSourceSamples')
 
 module.exports = function validateReceivedImages (t, source) {

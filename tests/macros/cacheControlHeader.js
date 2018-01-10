@@ -1,7 +1,7 @@
 const supertest = require('supertest')
 const path = require('path')
 
-const app = require('./../../src/app')
+const app = require('./../../src/app')('community')
 const getSourceSamples = require('./../helpers/getSourceSamples')
 
 module.exports = async function cacheControlHeader (t, source) {

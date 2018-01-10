@@ -1,7 +1,7 @@
 const test = require('ava')
 const supertest = require('supertest')
 
-const app = require('./../src/app')
+const app = require('./../src/app')('community')
 
 test('Should not pipe body if there is a matching if-modified-since', async t => {
   const res = await supertest(app)
