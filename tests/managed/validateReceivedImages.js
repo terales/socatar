@@ -56,19 +56,20 @@ async function parseImage (file) {
     jpeg: parseJpg,
     png: parsePng
   }
-  return parsers[ext](file)
-}
 
-async function parseJpg (file) {
   try {
-    return jpegParser.decode(
-      await promisify(fs.readFile)(file),
-      true
-    )
+    return await parsers[ext](file)
   } catch (error) {
     console.log(file)
     throw new Error(error)
   }
+}
+
+async function parseJpg (file) {
+  return jpegParser.decode(
+    await promisify(fs.readFile)(file),
+    true
+  )
 }
 
 async function parsePng (file) {
@@ -76,8 +77,6 @@ async function parsePng (file) {
     fs.createReadStream(file)
       .pipe(new PngParser())
       .on('parsed', function () { resolve(this) }) // Using regular function because PngParser modifies `this`
-  }).catch(error => {
-    console.log(file)
-    throw error
+      .on('error', error => { throw error })
   })
 }
