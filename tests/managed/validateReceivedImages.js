@@ -29,7 +29,7 @@ module.exports = function validateReceivedImages (t, source) {
               const received = parseImage(images[1])
               const diff = pixelmatch(sample, received, null, sample.width, sample.height)
               t.is(diff, 0, file + ' is different')
-            })
+            }).catch(error => t.fail(`Exception\n${file}\n${error}`))
         )
     )
 }
@@ -56,13 +56,7 @@ async function parseImage (file) {
     jpeg: parseJpg,
     png: parsePng
   }
-
-  try {
-    return await parsers[ext](file)
-  } catch (error) {
-    console.log(file)
-    throw new Error(error)
-  }
+  return parsers[ext](file)
 }
 
 async function parseJpg (file) {
@@ -74,9 +68,8 @@ async function parseJpg (file) {
 
 async function parsePng (file) {
   return new Promise(resolve => {
-    fs.createReadStream(file)
-      .pipe(new PngParser())
-      .on('parsed', function () { resolve(this) }) // Using regular function because PngParser modifies `this`
-      .on('error', error => { throw error })
+    const png = fs.createReadStream(file).pipe(new PngParser())
+    png.on('parsed', function () { resolve(this) }) // Using regular function because PngParser modifies `this`
+    png.on('error', error => { throw error })
   })
 }
