@@ -56,20 +56,19 @@ async function parseImage (file) {
     jpeg: parseJpg,
     png: parsePng
   }
+  return parsers[ext](file)
+}
 
+async function parseJpg (file) {
   try {
-    return parsers[ext](file)
+    return jpegParser.decode(
+      await promisify(fs.readFile)(file),
+      true
+    )
   } catch (error) {
     console.log(file)
     throw new Error(error)
   }
-}
-
-async function parseJpg (file) {
-  return jpegParser.decode(
-    await promisify(fs.readFile)(file),
-    true
-  )
 }
 
 async function parsePng (file) {
