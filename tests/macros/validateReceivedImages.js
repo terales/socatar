@@ -14,8 +14,8 @@ const app = require('./../../src/app')
 const getSourceSamples = require('./../helpers/getSourceSamples')
 
 module.exports = function validateReceivedImages (t, source) {
-  const samples = getSourceSamples(source)
-  const receivablesDir = path.join(__dirname, '..', 'sources', source, 'receivables')
+  const samples = getSourceSamples(source, 'community')
+  const receivablesDir = path.join(__dirname, '..', 'sources', source, 'receivables-community')
 
   clearDir(receivablesDir)
 

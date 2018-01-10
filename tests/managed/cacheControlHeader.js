@@ -5,7 +5,7 @@ const app = require('./../../src/app')
 const getSourceSamples = require('./../helpers/getSourceSamples')
 
 module.exports = async function cacheControlHeader (t, source) {
-  const sample = path.parse(getSourceSamples(source).files[0]).name
+  const sample = path.parse(getSourceSamples(source, 'managed').files[0]).name
 
   const res = await supertest(app)
     .get(`/${source}/${sample}`)
