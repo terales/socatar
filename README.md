@@ -38,7 +38,7 @@ Uptime: [![Uptime](http://www.sixnines.io/b/28f4)](http://www.sixnines.io/h/28f4
 
 * Facebook with id, like `100001584476227`
 * GitHub with login, like `terales`
-* Google with Google+ id, like `+SriramSaroop` OR gmail address
+* Google with GMail address
 * Gravatar with email
 * Twitter with username, like `robwormald`
 

@@ -8,8 +8,8 @@ const testRunner = require('./helpers/runForPullRequestFromFork')('google') ? te
 
 testRunner('Should not pipe body if there is a matching ETag', async t => {
   const res = await supertest(app)
-    .get('/google/+SriramSaroop')
-    .set('If-None-Match', '"v30b6"')
+    .get('/google/terehov.alexander.serg@gmail.com')
+    .set('If-None-Match', '"v6d30"')
 
   t.is(res.statusCode, 304)
   t.deepEqual(res.body, {})
