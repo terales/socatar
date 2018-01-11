@@ -36,7 +36,7 @@ Uptime: [![Uptime](http://www.sixnines.io/b/28f4)](http://www.sixnines.io/h/28f4
 
 ### Currently supported sources
 
-* Facebook with id, like `100001584476227` OR profile slug, like `yegor256`
+* Facebook with id, like `100001584476227`
 * GitHub with login, like `terales`
 * Google with Google+ id, like `+SriramSaroop` OR gmail address
 * Gravatar with email
