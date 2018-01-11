@@ -11,25 +11,25 @@ const PngParser = require('pngjs').PNG
 const detectFileType = require('./../helpers/detectFileType')
 
 module.exports = async function areImagesLooksAlike (samplePath, receivedPath) {
-  const ext = detectFileType(samplePath)
-
-  if (['xml', 'svg'].includes(ext)) {
-    return fs.statSync(samplePath).size === fs.statSync(receivedPath).size
-  }
-
-  const sample = await parseImage(samplePath, ext)
-  const received = await parseImage(receivedPath, ext)
+  const sample = await parseImage(samplePath)
+  const received = await parseImage(receivedPath)
   const difference = pixelmatch(sample, received, null, sample.width, sample.height)
   return difference < 0.01
 }
 
-async function parseImage (file, ext) {
+async function parseImage (file) {
+  const ext = detectFileType(file)
   const parsers = {
     jpg: parseJpg,
     jpeg: parseJpg,
     png: parsePng
   }
-  return parsers[ext](file)
+  try {
+    return parsers[ext](file)
+  } catch (error) {
+    console.log(file, error)
+    throw new Error(error)
+  }
 }
 
 async function parseJpg (file) {
