@@ -16,5 +16,5 @@ if (process.env.CLOUDINARY_URL) {
     test(source + ':notFoundImages - managed', notFoundImages, source)
   })
 } else {
-  console.log('Managet tier acceptance test suite skipped because of hidden/empty `CLOUDINARY_URL` environment variable')
+  console.log('Managed tier acceptance test suite skipped because of hidden/empty `CLOUDINARY_URL` environment variable')
 }

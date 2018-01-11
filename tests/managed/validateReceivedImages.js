@@ -13,25 +13,22 @@ const PngParser = require('pngjs').PNG
 // Local modules
 const app = require('./../../src/app')('managed')
 const getSourceSamples = require('./../helpers/getSourceSamples')
+const detectFileType = require('./../helpers/detectFileType')
 
-module.exports = function validateReceivedImages (t, source) {
+module.exports = async function validateReceivedImages (t, source) {
   const samples = getSourceSamples(source, 'managed')
   const receivablesDir = path.join(__dirname, '..', 'sources', source, 'receivables-managed')
 
   clearDir(receivablesDir)
 
-  return Promise.all(samples.files.map(file =>
-            Promise.all([
-              path.join(samples.dir, file),
-              getReceivedImage(receivablesDir, source, file)
-            ]).then(images => {
-              const sample = parseImage(t, images[0])
-              const received = parseImage(t, images[1])
-              const diff = pixelmatch(sample, received, null, sample.width, sample.height)
-              t.is(diff, 0, file + ' is different')
-            }).catch(error => failTestWithLogs(t, file, error))
-        )
-    )
+  t.plan(samples.files.length)
+
+  for (let file of samples.files) {
+    const sample = await parseImage(path.join(samples.dir, file))
+    const received = await parseImage(getReceivedImage(receivablesDir, source, file))
+    const diff = pixelmatch(sample, received, null, sample.width, sample.height)
+    t.is(diff, 0, file + ' is different')
+  }
 }
 
 function clearDir (dir) {
@@ -42,41 +39,44 @@ function clearDir (dir) {
 function getReceivedImage (receivablesDir, source, file) {
   return new Promise(resolve => {
     supertest(app)
-        .get(`/${source}/` + path.parse(file).name)
+        .get(`/${source}/${path.parse(file).name}`)
         .redirects(1)
         .pipe(fs.createWriteStream(path.join(receivablesDir, file)))
         .on('finish', () => resolve(path.join(receivablesDir, file)))
   })
 }
 
-async function parseImage (t, file) {
-  const ext = path.parse(file).ext.slice(1)
+async function parseImage (file) {
+  const image = await file
+  const ext = detectFileType(image)
+  if (!ext) { throw new Error(`Can't detect image type. Size: ${fs.statSync(image).size}, path: ${image}`) }
+
   const parsers = {
     jpg: parseJpg,
     jpeg: parseJpg,
     png: parsePng
   }
 
-  return parsers[ext](t, file)
+  if (!parsers[ext]) { throw new Error(`No parser for ${ext} available. Size: ${fs.statSync(image).size}, path: ${image}`) }
+
+  return parsers[ext](image)
 }
 
-async function parseJpg (t, file) {
+async function parseJpg (file) {
   try {
     return jpegParser.decode(
       await promisify(fs.readFile)(file),
       true
     )
-  } catch (error) { failTestWithLogs(t, file, error) }
+  } catch (error) {
+    console.log(error)
+  }
 }
 
-async function parsePng (t, file) {
+async function parsePng (file) {
   return new Promise(resolve => {
     const png = fs.createReadStream(file).pipe(new PngParser())
     png.on('parsed', function () { resolve(this) }) // Using regular function because PngParser modifies `this`
-    png.on('error', error => failTestWithLogs(t, file, error))
+    png.on('error', error => { throw error })
   })
-}
-
-function failTestWithLogs (t, file, error) {
-  t.fail(`Exception\n${file}\n${error}`)
 }

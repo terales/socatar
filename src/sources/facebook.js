@@ -3,7 +3,7 @@ const request = require('request')
 const StreamSearch = require('streamsearch')
 
 module.exports = function getFacebookUrl (user) {
-  if (Number.isNaN(user)) { return fetchFromId(user) }
+  if (!Number.isNaN(user)) { return fetchFromId(user) }
   return fetchFromSlug(user)
 }
 

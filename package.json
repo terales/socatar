@@ -7,7 +7,7 @@
     "start": "node src/server.js",
     "start-dev": "nodemon src/server.js --watch src/",
     "start-dev-managed": "set TIER=managed&&nodemon src/server.js --watch src/",
-    "test": "standard && ava --verbose --sequental",
+    "test": "standard && ava --timeout=30s --verbose --serial",
     "fix-style": "standard --fix"
   },
   "dependencies": {
@@ -24,11 +24,13 @@
     "ava": "0.24.0",
     "codacy-coverage": "2.0.3",
     "coveralls": "3.0.0",
+    "file-type": "7.4.0",
     "jpeg-js": "0.3.3",
     "nodemon": "1.14.9",
     "nyc": "11.4.1",
     "pixelmatch": "4.0.2",
     "pngjs": "3.3.1",
+    "read-chunk": "2.1.0",
     "rimraf": "2.6.2",
     "standard": "10.0.3",
     "supertest": "3.0.0"
