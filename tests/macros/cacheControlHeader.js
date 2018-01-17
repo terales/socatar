@@ -1,11 +1,11 @@
 const supertest = require('supertest')
 const path = require('path')
 
-const app = require('./../../src/app')
+const app = require('./../../src/app')('community')
 const getSourceSamples = require('./../helpers/getSourceSamples')
 
 module.exports = async function cacheControlHeader (t, source) {
-  const sample = path.parse(getSourceSamples(source).files[0]).name
+  const sample = path.parse(getSourceSamples(source, 'community').files[0]).name
 
   const res = await supertest(app)
     .get(`/${source}/${sample}`)

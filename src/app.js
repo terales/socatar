@@ -10,26 +10,36 @@ const express = require('express')
 // Load configuration
 require('dotenv').config()
 
-//
-// Configure app workflow
-//
-const app = express()
+module.exports = function configureApp (tier) {
+  const app = express()
 
-app.use(express.static(path.join(__dirname, 'public')))
+  app.use(express.static(path.join(__dirname, 'public'), {
+    index: tier === 'managed' ? 'managed.html' : 'index.html'
+  }))
 
-app.get('/:source/:user', [
-  requireLocalMiddleware('setLoggerExtraContent'),
-  requireLocalMiddleware('getImageUrl'),
-  requireLocalMiddleware('sendUnmodifiedHeaderIfApplicable'),
-  requireLocalMiddleware('filterNotFoundImages'),
-  requireLocalMiddleware('streamImage')
-])
+  const workflow = []
 
-// Error handlers
-app.use(requireLocalMiddleware('imageNotFoundHandler'))
-app.use(opbeat.middleware.express())
+  if (tier === 'managed') {
+    workflow.push(requireLocalMiddleware('setLoggerExtraContent'))
+    workflow.push(requireLocalMiddleware('getImageUrl'))
+    workflow.push(requireLocalMiddleware('redirectToCloudinary'))
+  } else {
+    workflow.push(requireLocalMiddleware('setLoggerExtraContent'))
+    workflow.push(requireLocalMiddleware('getImageUrl'))
+    workflow.push(requireLocalMiddleware('getImageRequest'))
+    workflow.push(requireLocalMiddleware('sendUnmodifiedHeaderIfApplicable'))
+    workflow.push(requireLocalMiddleware('filterNotFoundImages'))
+    workflow.push(requireLocalMiddleware('streamImage'))
+  }
 
-module.exports = app
+  app.get('/:source/:user', workflow)
+
+  // Error handlers
+  app.use(requireLocalMiddleware('imageNotFoundHandler'))
+  app.use(opbeat.middleware.express())
+
+  return app
+}
 
 function requireLocalMiddleware (name) {
   return require(path.join(__dirname, 'middleware', name))
