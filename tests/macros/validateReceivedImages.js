@@ -6,12 +6,13 @@ const promisify = require('util').promisify
 // Third party dependencies
 const supertest = require('supertest')
 const rimraf = require('rimraf')
-const pixelmatch = require('pixelmatch')
-const jpegParser = require('jpeg-js')
+const compareImages = require('resemblejs/compareImages')
 
 // Local modules
 const app = require('./../../src/app')
 const getSourceSamples = require('./../helpers/getSourceSamples')
+
+const readFile = promisify(fs.readFile)
 
 module.exports = function validateReceivedImages (t, source) {
   const samples = getSourceSamples(source)
@@ -23,11 +24,19 @@ module.exports = function validateReceivedImages (t, source) {
             Promise.all([
               path.join(samples.dir, file),
               getReceivedImage(receivablesDir, source, file)
-            ]).then(images => {
-              const sample = parseImage(images[0])
-              const received = parseImage(images[1])
-              const diff = pixelmatch(sample, received, null, sample.width, sample.height)
-              t.is(diff, 0, file + ' is different')
+            ]).then(async images => {
+              return {
+                sample: images[0],
+                received: images[1],
+                comparison: await compareImages(
+                  await readFile(images[0]),
+                  await readFile(images[1]),
+                  { output: { outputDiff: false } }
+                )
+              }
+            }).then(({sample, received, comparison}) => {
+              t.true(comparison.isSameDimensions, printComparisonError(sample, received, comparison))
+              t.true(comparison.rawMisMatchPercentage < 0.05, printComparisonError(sample, received, comparison))
             })
         )
     )
@@ -47,9 +56,8 @@ function getReceivedImage (receivablesDir, source, file) {
   })
 }
 
-async function parseImage (file) {
-  return jpegParser.decode(
-    await promisify(fs.readFile)(file),
-    true
-  )
+function printComparisonError (sample, received, comparison) {
+  return 'Sample: ' + sample + '\n' +
+  'Received: ' + received + '\n' +
+  JSON.stringify(comparison, null, 2)
 }
