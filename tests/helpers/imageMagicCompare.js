@@ -3,8 +3,8 @@ const { spawn } = require('child_process')
 
 module.exports = function imageMagicCompare (sample, received) {
   return new Promise((resolve, reject) => {
-    // magick compare -fuzz 2% -metric AE {{sample}} {{received}} null:
-    const options = ['-fuzz', '2%', '-metric', 'AE', sample, received, 'null:']
+    // magick compare -fuzz 5% -metric AE {{sample}} {{received}} null:
+    const options = ['-fuzz', '5%', '-metric', 'AE', sample, received, 'null:']
     const imagemagic = os.platform() === 'win32'
       ? spawn('magick', ['compare'].concat(options))
       : spawn('compare', options)
