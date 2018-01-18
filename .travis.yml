@@ -20,11 +20,10 @@ addons:
       - libgif-dev
 
 before_install:
-  - magick -version
-
   # Checks if Imagemagick is already sufficient version
   # If not installs it from the sources
   - convert -version | grep $IMAGEMAGICK_VERSION || {
+    magick -version
     export CORES=$(nproc) &&
     echo "Using $CORES cores for compiling..." &&
     cd /tmp &&
