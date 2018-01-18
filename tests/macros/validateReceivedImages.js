@@ -27,7 +27,7 @@ module.exports = async function validateReceivedImages (t, source) {
 }
 
 function clearDir (dir) {
-  if (fs.existsSync(dir)) { rimraf.sync(dir) }
+  rimraf.sync(dir)
   fs.mkdirSync(dir)
 }
 
