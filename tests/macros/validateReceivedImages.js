@@ -25,21 +25,20 @@ module.exports = function validateReceivedImages (t, source) {
               path.join(samples.dir, file),
               getReceivedImage(receivablesDir, source, file)
             ]).then(async images => {
-              try {
-                return {
-                  sample: images[0],
-                  received: images[1],
-                  comparison: await compareImages(
-                    await readFile(images[0]),
-                    await readFile(images[1]),
-                    { output: { outputDiff: false } }
-                  )
-                }
-              } catch (error) { throw error }
+              console.log('Comparing ' + files)
+              return {
+                sample: images[0],
+                received: images[1],
+                comparison: await compareImages(
+                  await readFile(images[0]),
+                  await readFile(images[1]),
+                  { output: { outputDiff: false } }
+                )
+              }
             }).then(({sample, received, comparison}) => {
               t.true(comparison.isSameDimensions, printComparisonError(sample, received, comparison))
               t.true(comparison.rawMisMatchPercentage < 0.05, printComparisonError(sample, received, comparison))
-            }).catch(error => t.fail(printComparisonError('', '', error)))
+            })
         )
     )
 }
