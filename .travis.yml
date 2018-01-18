@@ -10,7 +10,7 @@ cache:
 
 env:
   global:
-  - IMAGEMAGICK_VERSION: '7.0.7-21'
+    - IMAGEMAGICK_VERSION: '7.0.7-21'
 
 addons:
   apt:
@@ -20,8 +20,11 @@ addons:
       - libgif-dev
 
 before_install:
+  - magick -version
+
   # Checks if Imagemagick is already sufficient version
   # If not installs it from the sources
+  # --with-quantum-depth=8 --disable-hdri -- Would make ImageMagick use 4 time less memory
   - convert -version | grep $IMAGEMAGICK_VERSION || {
     magick -version
     export CORES=$(nproc) &&
@@ -30,7 +33,7 @@ before_install:
     curl -O https://www.imagemagick.org/download/ImageMagick-$IMAGEMAGICK_VERSION.tar.gz &&
     tar xvzf ImageMagick-$IMAGEMAGICK_VERSION.tar.gz &&
     cd ImageMagick-* &&
-    ./configure --with-quantum-depth=8 --disable-hdri --prefix=$HOME/opt && # --with-quantum-depth=8 --disable-hdri -- Would make ImageMagick use 4 time less memory
+    ./configure --with-quantum-depth=8 --disable-hdri --prefix=$HOME/opt &&
     make -j$CORES &&
     make install -j$CORES &&
     $HOME/opt/bin/magick -version | grep $IMAGEMAGICK_VERSION &&
