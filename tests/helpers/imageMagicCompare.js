@@ -4,13 +4,10 @@ const { spawn } = require('child_process')
 module.exports = function imageMagicCompare (sample, received) {
   return new Promise((resolve, reject) => {
     // magick compare -fuzz 2% -metric AE {{sample}} {{received}} null:
-
-    if (os.platform() === 'win32') {
-      const imagemagic = spawn('magick', ['compare', '-fuzz', '2%', '-metric', 'AE', sample, received, 'null:'])
-    } else {
-      const imagemagic = spawn('compare', ['-fuzz', '2%', '-metric', 'AE', sample, received, 'null:'])
-    }
-
+    const options = ['-fuzz', '2%', '-metric', 'AE', sample, received, 'null:']
+    const imagemagic = os.platform() === 'win32'
+      ? spawn('magick', ['compare'].concat(options))
+      : spawn('compare', options)
 
     imagemagic.stderr.on('data', data => {
       if (Number.isNaN(data)) { reject(new Error(`imagemagic error:\n  ${data}`)) }
