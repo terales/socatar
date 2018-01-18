@@ -22,10 +22,8 @@
     "ava": "0.24.0",
     "codacy-coverage": "2.0.3",
     "coveralls": "3.0.0",
-    "jpeg-js": "0.3.3",
     "nodemon": "1.14.11",
     "nyc": "11.4.1",
-    "pixelmatch": "4.0.2",
     "rimraf": "2.6.2",
     "standard": "10.0.3",
     "supertest": "3.0.0"
