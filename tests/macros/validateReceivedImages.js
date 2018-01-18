@@ -37,7 +37,7 @@ module.exports = function validateReceivedImages (t, source) {
             }).then(({sample, received, comparison}) => {
               t.true(comparison.isSameDimensions, printComparisonError(sample, received, comparison))
               t.true(comparison.rawMisMatchPercentage < 0.05, printComparisonError(sample, received, comparison))
-            })
+            }).catch(error => t.fail(printComparisonError('', '', error)))
         )
     )
 }
