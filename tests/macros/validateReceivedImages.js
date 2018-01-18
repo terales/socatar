@@ -14,33 +14,26 @@ const getSourceSamples = require('./../helpers/getSourceSamples')
 
 const readFile = promisify(fs.readFile)
 
-module.exports = function validateReceivedImages (t, source) {
+module.exports = async function validateReceivedImages (t, source) {
   const samples = getSourceSamples(source)
   const receivablesDir = path.join(__dirname, '..', 'sources', source, 'receivables')
 
+  t.plan(samples.files.length * 2)
+
   clearDir(receivablesDir)
 
-  return Promise.all(samples.files.map(file =>
-            Promise.all([
-              path.join(samples.dir, file),
-              getReceivedImage(receivablesDir, source, file)
-            ]).then(async images => {
-              console.log('Comparing ' + files)
-              return {
-                sample: images[0],
-                received: images[1],
-                comparison: await compareImages(
-                  await readFile(images[0]),
-                  await readFile(images[1]),
-                  { output: { outputDiff: false } }
-                )
-              }
-            }).then(({sample, received, comparison}) => {
-              t.true(comparison.isSameDimensions, printComparisonError(sample, received, comparison))
-              t.true(comparison.rawMisMatchPercentage < 0.05, printComparisonError(sample, received, comparison))
-            })
-        )
-    )
+  for (let file of samples.files) {
+    const sample = path.join(samples.dir, file)
+    const received = await getReceivedImage(receivablesDir, source, file)
+
+    try {
+      const comparison = await compareImages(await readFile(sample), await readFile(received))
+      t.true(comparison.isSameDimensions, printComparisonError(sample, received, comparison))
+      t.true(comparison.rawMisMatchPercentage < 0.05, printComparisonError(sample, received, comparison))
+    } catch (error) {
+      t.fail(printComparisonError(sample, received, error))
+    }
+  }
 }
 
 function clearDir (dir) {
