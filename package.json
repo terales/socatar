@@ -20,12 +20,12 @@
   },
   "devDependencies": {
     "ava": "0.24.0",
+    "canvas-prebuilt": "1.6.5-prerelease.1",
     "codacy-coverage": "2.0.3",
     "coveralls": "3.0.0",
-    "jpeg-js": "0.3.3",
     "nodemon": "1.14.11",
     "nyc": "11.4.1",
-    "pixelmatch": "4.0.2",
+    "resemblejs": "2.6.0",
     "rimraf": "2.6.2",
     "standard": "10.0.3",
     "supertest": "3.0.0"
