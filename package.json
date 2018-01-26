@@ -19,7 +19,7 @@
     "streamsearch": "0.1.2"
   },
   "devDependencies": {
-    "ava": "0.24.0",
+    "ava": "0.25.0",
     "codacy-coverage": "2.0.3",
     "coveralls": "3.0.0",
     "nodemon": "1.14.11",
