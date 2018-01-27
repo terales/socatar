@@ -7,7 +7,7 @@ const supertest = require('supertest')
 const rimraf = require('rimraf')
 
 // Local modules
-const app = require('./../../src/app')
+const app = require('./../../src/app')()
 const getSourceSamples = require('./../helpers/getSourceSamples')
 const imageMagicCompare = require('./../helpers/imageMagicCompare')
 
