@@ -10,18 +10,31 @@ const express = require('express')
 // Load configuration, if called from test
 require('dotenv').config()
 
-module.exports = function configureApp () {
+module.exports = function configureApp (useCloudinary = false) {
   const app = express()
 
   app.use(express.static(path.join(__dirname, 'public')))
 
-  app.get('/:source/:user', [
-    requireLocalMiddleware('setLoggerExtraContent'),
-    requireLocalMiddleware('getImageUrl'),
-    requireLocalMiddleware('sendUnmodifiedHeaderIfApplicable'),
-    requireLocalMiddleware('filterNotFoundImages'),
-    requireLocalMiddleware('streamImage')
-  ])
+  const workflow = []
+
+  if (useCloudinary) {
+    workflow.push(requireLocalMiddleware('setLoggerExtraContent'))
+    workflow.push(requireLocalMiddleware('normalizeDimentions'))
+    workflow.push(requireLocalMiddleware('getImageUrl'))
+    workflow.push(requireLocalMiddleware('redirectToCloudinary'))
+  } else {
+    workflow.push(requireLocalMiddleware('setLoggerExtraContent'))
+    workflow.push(requireLocalMiddleware('normalizeDimentions'))
+    workflow.push(requireLocalMiddleware('getImageUrl'))
+    workflow.push(requireLocalMiddleware('getImageRequest'))
+    workflow.push(requireLocalMiddleware('sendUnmodifiedHeaderIfApplicable'))
+    workflow.push(requireLocalMiddleware('filterNotFoundImages'))
+    workflow.push(requireLocalMiddleware('streamImage'))
+  }
+
+  // Routes
+  app.get('/:source/:user', workflow)
+  app.get('/:source/:user/:width-:height', workflow)
 
   // Error handlers
   app.use(requireLocalMiddleware('imageNotFoundHandler'))

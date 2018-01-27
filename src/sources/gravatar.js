@@ -1,6 +1,6 @@
 const crypto = require('crypto')
 
-module.exports = function getGravatarUrl (email) {
+module.exports = function getGravatarUrl (email, width) {
   const md5 = crypto.createHash('md5').update(email).digest('hex')
-  return `http://www.gravatar.com/avatar/${md5}?s=200&d=404`
+  return `http://www.gravatar.com/avatar/${md5}?s=${width}&d=404`
 }
