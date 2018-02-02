@@ -22,7 +22,7 @@
     "ava": "0.25.0",
     "codacy-coverage": "2.0.3",
     "coveralls": "3.0.0",
-    "nodemon": "1.14.11",
+    "nodemon": "1.14.12",
     "nyc": "11.4.1",
     "rimraf": "2.6.2",
     "standard": "10.0.3",
