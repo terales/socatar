@@ -9,7 +9,7 @@ const rimraf = require('rimraf')
 const app = require('./../../src/app')(true)
 
 // Test helpers
-const testRunner = require('./../helpers/runForPullRequestFromFork')('google') ? test : test.skip
+const testRunner = process.env.CLOUDINARY_URL ? test : test.skip
 const getImagesFromFolder = require('./../helpers/getImagesFromFolder')
 const imageMagicCompare = require('./../helpers/imageMagicCompare')
 const saveReceivedImage = require('./../helpers/saveReceivedImage')

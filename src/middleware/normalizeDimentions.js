@@ -1,14 +1,14 @@
 module.exports = function normalizeDimentions (req, res, next) {
-  if (req.params.width || req.params.height) {
-    if (!validate(req.params.width) || !validate(req.params.height)) {
-      return res.status(400).send('Invalid image dimentions. Width and height should be integers from 1 to 599')
-    }
-  } else {
-    req.params.width = 100
-    req.params.height = 100
+  if (validateDimentionsIfPresent(req.params)) {
+    return res.status(400).send('Invalid image dimentions. Width and height should be integers from 1 to 599')
   }
 
+  req.params = Object.assign({width: 100, height: 100}, req.params)
   next()
+}
+
+function validateDimentionsIfPresent ({width, height}) {
+  return (width || height) && (!validate(width) || !validate(height))
 }
 
 function validate (dimention) {
