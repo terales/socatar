@@ -7,29 +7,41 @@ const path = require('path')
 // Third party dependencies
 const express = require('express')
 
-// Load configuration
+// Load configuration, if called from test
 require('dotenv').config()
 
-//
-// Configure app workflow
-//
-const app = express()
+module.exports = function configureApp (useCloudinary = false) {
+  const app = express()
 
-app.use(express.static(path.join(__dirname, 'public')))
+  app.use(express.static(path.join(__dirname, 'public')))
 
-app.get('/:source/:user', [
-  requireLocalMiddleware('setLoggerExtraContent'),
-  requireLocalMiddleware('getImageUrl'),
-  requireLocalMiddleware('sendUnmodifiedHeaderIfApplicable'),
-  requireLocalMiddleware('filterNotFoundImages'),
-  requireLocalMiddleware('streamImage')
-])
+  const workflow = []
 
-// Error handlers
-app.use(requireLocalMiddleware('imageNotFoundHandler'))
-app.use(opbeat.middleware.express())
+  if (useCloudinary) {
+    workflow.push(requireLocalMiddleware('setLoggerExtraContent'))
+    workflow.push(requireLocalMiddleware('normalizeDimentions'))
+    workflow.push(requireLocalMiddleware('getImageUrl'))
+    workflow.push(requireLocalMiddleware('redirectToCloudinary'))
+  } else {
+    workflow.push(requireLocalMiddleware('setLoggerExtraContent'))
+    workflow.push(requireLocalMiddleware('normalizeDimentions'))
+    workflow.push(requireLocalMiddleware('getImageUrl'))
+    workflow.push(requireLocalMiddleware('getImageRequest'))
+    workflow.push(requireLocalMiddleware('sendUnmodifiedHeaderIfApplicable'))
+    workflow.push(requireLocalMiddleware('filterNotFoundImages'))
+    workflow.push(requireLocalMiddleware('streamImage'))
+  }
 
-module.exports = app
+  // Routes
+  app.get('/:source/:user', workflow)
+  app.get('/:source/:user/:width-:height', workflow)
+
+  // Error handlers
+  app.use(requireLocalMiddleware('imageNotFoundHandler'))
+  app.use(opbeat.middleware.express())
+
+  return app
+}
 
 function requireLocalMiddleware (name) {
   return require(path.join(__dirname, 'middleware', name))

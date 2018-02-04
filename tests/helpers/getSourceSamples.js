@@ -1,11 +1,12 @@
-const fs = require('fs')
+// Native Node.js modules
 const path = require('path')
+
+const getImagesFromFolder = require('./getImagesFromFolder')
 
 module.exports = function getSourceSamples (source) {
   const dir = path.join(__dirname, '..', 'sources', source, 'samples')
   return {
     dir,
-    files: fs.readdirSync(dir)
-      .filter(file => ['png', 'jpg', 'jpeg'].includes(path.parse(file).ext.slice(1)))
+    files: getImagesFromFolder(dir)
   }
 }

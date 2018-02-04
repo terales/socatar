@@ -2,16 +2,16 @@
 const request = require('request')
 const StreamSearch = require('streamsearch')
 
-module.exports = function getFacebookUrl (user) {
-  if (Number.isNaN(user)) { return fetchFromId(user) }
-  return fetchFromSlug(user)
+module.exports = function getFacebookUrl (user, width, height) {
+  if (Number.isNaN(user)) { return fetchFromId(user, width, height) }
+  return fetchFromSlug(user, width, height)
 }
 
-function fetchFromId (id) {
-  return `https://graph.facebook.com/${id}/picture?width=100&height=100`
+function fetchFromId (id, width, height) {
+  return `https://graph.facebook.com/${id}/picture?width=${width}&height=${height}`
 }
 
-async function fetchFromSlug (slug) {
+async function fetchFromSlug (slug, width, height) {
   return new Promise((resolve, reject) => {
     const res = request({
       url: 'https://www.facebook.com/' + slug,
@@ -20,7 +20,7 @@ async function fetchFromSlug (slug) {
 
     const search = getSearcher(id => {
       res.abort()
-      resolve(fetchFromId(id))
+      resolve(fetchFromId(id, width, height))
     })
     res.on('response', response => { if (response.statusCode === 404) reject(new Error('404')) })
     res.on('data', (data) => search.push(data))

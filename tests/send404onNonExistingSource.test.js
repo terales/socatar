@@ -8,7 +8,7 @@ const test = require('ava')
 const supertest = require('supertest')
 
 // Local modules
-const app = require('./../src/app')
+const app = require('./../src/app')()
 const fallback = path.join(__dirname, '..', 'src', 'public', 'fallback.svg')
 
 test('Should send 404 on non existent source', async t => {

@@ -6,7 +6,7 @@ You don't need to maintain same implementations for getting user pictures in you
 
 Use in HTML:
 ```html
-<img src="https://socatar.com/twitter/yegor256" />
+<img src="https://socatar.com/twitter/yegor256/50-50" />
 ```
 
 or via API:
@@ -41,6 +41,16 @@ Uptime: [![Uptime](http://www.sixnines.io/b/28f4)](http://www.sixnines.io/h/28f4
 * Google with Google+ id, like `+SriramSaroop` OR gmail address
 * Gravatar with email
 * Twitter with username, like `robwormald`
+
+### Resize images with Cloudinary
+
+Thanks to the Cloudinary generous limits we are able to resize images from any source.
+Just prepend required width and height to the image url:
+
+```
+https://socatar.com/twitter/yegor256/50-50
+                             width - ^^ ^^ - height
+```
 
 ### Getting help
 
