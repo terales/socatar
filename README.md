@@ -52,6 +52,8 @@ https://socatar.com/twitter/yegor256/50-50
                              width - ^^ ^^ - height
 ```
 
+If you omit size (ex. `https://socatar.com/twitter/yegor256`) than 100×100 image would be served. For you custom deployment you can modify it via environment variables, see [`.env-template`](.env-template).
+
 ### Getting help
 
 Please, report anything via the GitHub issues: https://github.com/terales/socatar/issues.
