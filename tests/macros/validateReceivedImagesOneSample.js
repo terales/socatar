@@ -10,7 +10,7 @@ const getImagesFromFolder = require('./../helpers/getImagesFromFolder')
 const imageMagicCompare = require('./../helpers/imageMagicCompare')
 const saveReceivedImage = require('./../helpers/saveReceivedImage')
 
-module.exports = async function validateReceivedImagesOneSample (t, app, routeSuffix, testDirName, receivablesDirName) {
+module.exports = async function validateReceivedImagesOneSample (t, app, testDirName, receivablesDirName) {
   const receivablesDir = path.join(testDirName, receivablesDirName)
   const samplesDir = path.join(testDirName, 'samples')
   const samples = getImagesFromFolder(samplesDir).map(decomposeSample)
@@ -19,7 +19,7 @@ module.exports = async function validateReceivedImagesOneSample (t, app, routeSu
   t.plan(samples.length)
 
   for (let sample of samples) {
-    const route = `/${sample.source}/${sample.user}` + routeSuffix
+    const route = `/${sample.source}/${sample.user}/original`
     const received = await saveReceivedImage(app, route, receivablesDir, path.parse(sample.path).base)
     const isEqual = await imageMagicCompare(path.join(samplesDir, sample.path), received)
     t.true(isEqual, 'Received unexpected image: ' + route)
