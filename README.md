@@ -12,10 +12,10 @@ Use in HTML:
 or via API:
 ```shell
 // cURL save image to your current folder
-curl https://socatar.com/github/terales -o terales.jpg
+curl https://socatar.com/github/terales/50-50 -o terales.jpg
 
 // Windows via PowerShell, save image to your Desktop
-Invoke-WebRequest https://socatar.com/github/terales -OutFile "$([Environment]::GetFolderPath("Desktop"))\terales.jpg"
+Invoke-WebRequest https://socatar.com/github/terales/50-50 -OutFile "$([Environment]::GetFolderPath("Desktop"))\terales.jpg"
 ```
 
 ### Content
@@ -53,6 +53,9 @@ https://socatar.com/twitter/yegor256/50-50
 ```
 
 If you omit size (ex. `https://socatar.com/twitter/yegor256`) than 100×100 image would be served. For you custom deployment you can modify it via environment variables, see [`.env-template`](.env-template).
+
+When Cloudinary integration is enabled Socatar.com will get the url of required image
+and redirect it to Cloudinary fetch with transformations applied.
 
 ### Getting help
 
