@@ -1,11 +1,13 @@
 module.exports = function normalizeDimentions (req, res, next) {
+  const getOriginal = req.path.split('/').pop() === 'original'
+
   if (validateDimentionsIfPresent(req.params)) {
     return res.status(400).send('Invalid image dimentions. Width and height should be integers from 1 to 599')
   }
 
   req.params = Object.assign({
-    width: process.env.AVATAR_WIDTH,
-    height: process.env.AVATAR_HEIGHT
+    width: getOriginal ? -1 : process.env.AVATAR_WIDTH,
+    height: getOriginal ? -1 : process.env.AVATAR_HEIGHT
   }, req.params)
   next()
 }

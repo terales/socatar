@@ -7,18 +7,25 @@ module.exports = function redirectToCloudinary (req, res, next) {
 }
 
 function getCloudinaryUrl (url, width = 100, height = 100) {
-  return cloudinary.url(url, {
-    type: 'fetch',
-    sign_url: true,
-    transformation: [{
+  const transformation = {
+    fetch_format: 'auto',
+    default_image: process.env.CLOUDINARY_FALLBACK_IMAGE,
+    secure: true,
+    cdn_subdomain: true
+  }
+
+  if (width !== -1) {
+    Object.assign(transformation, {
       height: width,
       width: height,
       crop: 'thumb',
-      gravity: 'faces',
-      fetch_format: 'auto',
-      default_image: process.env.CLOUDINARY_FALLBACK_IMAGE,
-      secure: true,
-      cdn_subdomain: true
-    }]
+      gravity: 'faces'
+    })
+  }
+
+  return cloudinary.url(url, {
+    type: 'fetch',
+    sign_url: true,
+    transformation: [transformation]
   })
 }
