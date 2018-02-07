@@ -8,7 +8,9 @@ module.exports = function getFacebookUrl (user, width, height) {
 }
 
 function fetchFromId (id, width, height) {
-  return `https://graph.facebook.com/${id}/picture?width=${width}&height=${height}`
+  let url = `https://graph.facebook.com/${id}/picture`
+  if (width !== -1) { url += `?width=${width}&height=${height}` }
+  return url
 }
 
 async function fetchFromSlug (slug, width, height) {

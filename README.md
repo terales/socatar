@@ -57,6 +57,11 @@ If you omit size (ex. `https://socatar.com/twitter/yegor256`) than 100×100 imag
 When Cloudinary integration is enabled Socatar.com will get the url of required image
 and redirect it to Cloudinary fetch with transformations applied.
 
+Get an original image with a special `original` size:
+```
+https://socatar.com/twitter/yegor256/original
+```
+
 ### Getting help
 
 Please, report anything via the GitHub issues: https://github.com/terales/socatar/issues.

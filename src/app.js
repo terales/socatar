@@ -35,6 +35,7 @@ module.exports = function configureApp (useCloudinary = false) {
   // Routes
   app.get('/:source/:user', workflow)
   app.get('/:source/:user/:width-:height', workflow)
+  app.get('/:source/:user/original', workflow)
 
   // Error handlers
   app.use(requireLocalMiddleware('imageNotFoundHandler'))
