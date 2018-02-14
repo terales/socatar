@@ -10,7 +10,7 @@
     "fix-style": "standard --fix"
   },
   "dependencies": {
-    "cloudinary": "1.9.1",
+    "cloudinary": "1.10.0",
     "dotenv": "5.0.0",
     "express": "4.16.2",
     "lodash.get": "4.4.2",
