@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "ava": "0.25.0",
-    "codacy-coverage": "2.0.3",
+    "codacy-coverage": "2.0.4",
     "coveralls": "3.0.0",
     "nodemon": "1.15.0",
     "nyc": "11.4.1",
