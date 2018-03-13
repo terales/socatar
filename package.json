@@ -24,7 +24,7 @@
     "codacy-coverage": "2.0.3",
     "coveralls": "3.0.0",
     "nodemon": "1.15.0",
-    "nyc": "11.4.1",
+    "nyc": "11.6.0",
     "rimraf": "2.6.2",
     "standard": "10.0.3",
     "supertest": "3.0.0"
