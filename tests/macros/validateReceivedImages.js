@@ -34,8 +34,8 @@ function clearDir (dir) {
 function getReceivedImage (receivablesDir, source, file) {
   return new Promise(resolve => {
     supertest(app)
-        .get(`/${source}/` + path.parse(file).name)
-        .pipe(fs.createWriteStream(path.join(receivablesDir, file)))
-        .on('finish', () => resolve(path.join(receivablesDir, file)))
+      .get(`/${source}/` + path.parse(file).name)
+      .pipe(fs.createWriteStream(path.join(receivablesDir, file)))
+      .on('finish', () => resolve(path.join(receivablesDir, file)))
   })
 }
