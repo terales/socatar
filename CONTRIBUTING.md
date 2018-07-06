@@ -70,7 +70,7 @@ It's okay if it's your first Node.js project, just ask for setup help on the iss
 
 ### Run Socatar locally
 
-* Start server with `npm run start-dev` command, which automatically restarts on any `.js` file change in the `/src` directory. You would see an `Opbeat isn't correctly…` warning — ignore it as you don't need to log errors you see in development.
+* Start server with `npm run start-dev` command, which automatically restarts on any `.js` file change in the `/src` directory. You would see an `raven@X.X.X alert: no DSN provided…` warning — ignore it as you don't need to log errors you see in development.
 * Check that homepage accessible at http://localhost:8383/
 
 ### Run Socatar in production by yourself

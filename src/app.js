@@ -1,5 +1,6 @@
 // Error tracking
-const opbeat = require('opbeat')
+const Raven = require('raven')
+Raven.config().install()
 
 // Native Node.js modules
 const path = require('path')
@@ -12,6 +13,9 @@ require('dotenv').config()
 
 module.exports = function configureApp (useCloudinary = false) {
   const app = express()
+
+  // Error handler
+  app.use(Raven.requestHandler())
 
   app.use(express.static(path.join(__dirname, 'public')))
 
@@ -39,7 +43,7 @@ module.exports = function configureApp (useCloudinary = false) {
 
   // Error handlers
   app.use(requireLocalMiddleware('imageNotFoundHandler'))
-  app.use(opbeat.middleware.express())
+  app.use(Raven.errorHandler())
 
   return app
 }

@@ -1,6 +1,3 @@
-// Error tracking
-require('opbeat').start()
-
 // Load configuration
 require('dotenv').config()
 

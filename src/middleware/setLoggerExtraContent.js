@@ -1,11 +1,13 @@
 // Third party dependencies
-const opbeat = require('opbeat')
+const Raven = require('raven')
 
 module.exports = function setLoggerExtraContent (req, res, next) {
-  opbeat.setExtraContext({
+  Raven.setTagsContext({
     source: req.params.source,
-    user: req.params.user,
-    referer: req.headers['referer'] ? req.headers['referer'] : ''
+    referer: req.headers['referer'] || ''
+  })
+  Raven.setUserContext({
+    id: req.params.user
   })
   return next()
 }
