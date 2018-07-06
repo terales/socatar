@@ -5,10 +5,13 @@ module.exports = function normalizeDimentions (req, res, next) {
     return res.status(400).send('Invalid image dimentions. Width and height should be integers from 1 to 599')
   }
 
-  req.params = Object.assign({
+  const dimentions = {
     width: getOriginal ? -1 : process.env.AVATAR_WIDTH,
     height: getOriginal ? -1 : process.env.AVATAR_HEIGHT
-  }, req.params)
+  }
+
+  req.params = Object.assign(dimentions, req.params) // For middleware
+  res.locals = Object.assign(dimentions, res.locals) // For error handling
   next()
 }
 
