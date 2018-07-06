@@ -15,7 +15,7 @@
     "express": "4.16.2",
     "lodash.get": "4.4.2",
     "lodash.set": "4.3.2",
-    "opbeat": "4.17.0",
+    "raven": "2.6.3",
     "request": "2.83.0",
     "streamsearch": "0.1.2"
   },
