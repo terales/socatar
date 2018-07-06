@@ -22,12 +22,10 @@ module.exports = function configureApp (useCloudinary = false) {
   const workflow = []
 
   if (useCloudinary) {
-    workflow.push(requireLocalMiddleware('setLoggerExtraContent'))
     workflow.push(requireLocalMiddleware('normalizeDimentions'))
     workflow.push(requireLocalMiddleware('getImageUrl'))
     workflow.push(requireLocalMiddleware('redirectToCloudinary'))
   } else {
-    workflow.push(requireLocalMiddleware('setLoggerExtraContent'))
     workflow.push(requireLocalMiddleware('normalizeDimentions'))
     workflow.push(requireLocalMiddleware('getImageUrl'))
     workflow.push(requireLocalMiddleware('getImageRequest'))
