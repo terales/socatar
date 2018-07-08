@@ -23,4 +23,6 @@ module.exports = function imageNotFoundHandler (err, req, res, next) {
         .replace('height="100"', `height="${res.locals.height}"`)
     )
   }
+
+  return next()
 }
