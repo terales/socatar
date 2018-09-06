@@ -1,6 +1,6 @@
 {
   "name": "socatar",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Web service for easily requesting profile photos from several sources",
   "main": "src/server.js",
   "scripts": {
@@ -30,7 +30,7 @@
     "supertest": "3.2.0"
   },
   "engines": {
-    "node": "10.9.x"
+    "node": "10.10.x"
   },
   "author": "Aleksander Terekhov <socatar.com@gmail.com> (https://www.terales.info/)",
   "license": "MIT",
