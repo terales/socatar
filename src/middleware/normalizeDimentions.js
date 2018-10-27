@@ -15,7 +15,7 @@ module.exports = function normalizeDimentions (req, res, next) {
   next()
 }
 
-function validateDimentionsIfPresent ({width, height}) {
+function validateDimentionsIfPresent ({ width, height }) {
   return (width || height) && (!validate(width) || !validate(height))
 }
 
