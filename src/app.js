@@ -1,7 +1,3 @@
-// Error tracking
-const Raven = require('raven')
-Raven.config().install()
-
 // Native Node.js modules
 const path = require('path')
 
@@ -10,6 +6,13 @@ const express = require('express')
 
 // Load configuration, if called from test
 require('dotenv').config()
+
+// Error tracking
+const Raven = require('raven')
+if (process.env.NODE_ENV !== 'production') { // Disable error tracker for non-production environments
+  Raven.disableConsoleAlerts()
+}
+Raven.config().install()
 
 module.exports = function configureApp (useCloudinary = false) {
   const app = express()
