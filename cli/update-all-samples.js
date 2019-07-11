@@ -17,11 +17,11 @@ sources.forEach(source => {
 
   samples.files.forEach(sample => {
     requests.push(new Promise(resolve => {
-      let name = path.parse(sample).name
+      const name = path.parse(sample).name
       const targetFile = path.join(samples.dir, name)
       const req = request(`http://localhost:8383/${source}/${name}`)
       req.on('response', res => {
-        let ext = '.' + res.headers['content-type'].split('/')[1]
+        const ext = '.' + res.headers['content-type'].split('/')[1]
         req.pipe(fs.createWriteStream(targetFile + ext)).on('finished', () => resolve())
       })
     }))

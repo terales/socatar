@@ -18,7 +18,7 @@ module.exports = async function validateReceivedImages (t, source) {
 
   t.plan(samples.files.length)
 
-  for (let file of samples.files) {
+  for (const file of samples.files) {
     const sample = path.join(samples.dir, file)
     const received = await getReceivedImage(receivablesDir, source, file)
     const isEqual = await imageMagicCompare(sample, received)
