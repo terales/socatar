@@ -14,7 +14,7 @@ function getOptions (username) {
       query: `query { user(login:"${username}") {avatarUrl}}`
     },
     headers: {
-      'Authorization': 'bearer ' + process.env.GITHUB_TOKEN,
+      Authorization: 'bearer ' + process.env.GITHUB_TOKEN,
       'User-Agent': 'terales'
     }
   }

@@ -22,7 +22,7 @@ testRunner('Should return required size without Cloudinary if source supports it
 
   t.plan(samples.length)
 
-  for (let sample of samples) {
+  for (const sample of samples) {
     const route = `/${sample.source}/${sample.user}/${sample.size}-${sample.size}`
     const received = await saveReceivedImage(app, route, receivablesDir, path.parse(sample.path).base)
     const isEqual = await imageMagicCompare(path.join(samplesDir, sample.path), received)

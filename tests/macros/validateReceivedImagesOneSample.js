@@ -18,7 +18,7 @@ module.exports = async function validateReceivedImagesOneSample (t, app, testDir
 
   t.plan(samples.length)
 
-  for (let sample of samples) {
+  for (const sample of samples) {
     const route = `/${sample.source}/${sample.user}/original`
     const received = await saveReceivedImage(app, route, receivablesDir, path.parse(sample.path).base)
     const isEqual = await imageMagicCompare(path.join(samplesDir, sample.path), received)
