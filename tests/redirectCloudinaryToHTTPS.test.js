@@ -12,5 +12,5 @@ testRunner('Should always redirect to HTTPS Cloudinary URL', async t => {
     .get('/github/yegor256/192-192')
 
   t.is(res.statusCode, 302)
-  t.true(res.headers['location'].startsWith('https'))
+  t.true(res.headers.location.startsWith('https'))
 })
