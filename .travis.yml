@@ -14,3 +14,10 @@ after_success:
   - ./node_modules/.bin/nyc report --reporter=lcov
   - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
   - cat ./coverage/lcov.info | ./node_modules/.bin/codacy-coverage
+
+notifications:
+  email:
+    recipients:
+      - socatar.com@gmail.com
+    on_success: never
+    on_failure: always
