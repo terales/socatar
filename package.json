@@ -30,7 +30,7 @@
     "supertest": "4.0.2"
   },
   "engines": {
-    "node": "10.12.x"
+    "node": "12.13.x"
   },
   "author": "Aleksander Terekhov <socatar.com@gmail.com> (https://www.terales.info/)",
   "license": "MIT",
