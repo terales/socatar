@@ -40,9 +40,9 @@
     "url": "https://github.com/terales/socatar"
   },
   "ava": {
-    "helpers": [
-      "**/helpers/**/*",
-      "**/macros/**/*"
+    "files": [
+      "!**/helpers/**/*",
+      "!**/macros/**/*"
     ]
   }
 }

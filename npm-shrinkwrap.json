@@ -5553,7 +5553,7 @@
       "integrity": "sha512-UHYyq1MO8GsefGEt7EprS8UrXsm1TxEvFUX1IMTuSLU2Rh7fTIdFtl8xD7JiEYiWU2dl+NYAjCTksTehQUxPag==",
       "dev": true,
       "requires": {
-        "lodash": "^4.17.13"
+        "lodash": "^4.17.11"
       },
       "dependencies": {
         "lodash": {
