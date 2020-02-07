@@ -1,6 +1,6 @@
 {
   "name": "socatar",
-  "version": "1.0.73",
+  "version": "1.0.74",
   "description": "Web service for easily requesting profile photos from several sources",
   "main": "src/server.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "streamsearch": "0.1.2"
   },
   "devDependencies": {
-    "ava": "2.4.0",
+    "ava": "3.2.0",
     "codacy-coverage": "3.4.0",
     "coveralls": "3.0.9",
     "nodemon": "2.0.2",
@@ -40,9 +40,9 @@
     "url": "https://github.com/terales/socatar"
   },
   "ava": {
-    "helpers": [
-      "**/helpers/**/*",
-      "**/macros/**/*"
+    "files": [
+      "!**/helpers/**/*",
+      "!**/macros/**/*"
     ]
   }
 }
