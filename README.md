@@ -28,7 +28,7 @@ Invoke-WebRequest https://socatar.com/github/terales/50-50 -OutFile "$([Environm
 Uptime: [![Uptime](http://www.sixnines.io/b/28f4)](http://www.sixnines.io/h/28f4)
 [![Build Status](https://travis-ci.org/terales/socatar.svg?branch=master)](https://travis-ci.org/terales/socatar)
 [![Coverage Status](https://coveralls.io/repos/github/terales/socatar/badge.svg?branch=master)](https://coveralls.io/github/terales/socatar?branch=master)
-[![Greenkeeper badge](https://david-dm.org/terales/socatar.svg)](https://greenkeeper.io/)
+[![Dependencies Status](https://david-dm.org/terales/socatar.svg)](https://david-dm.org/terales/socatar)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/711f81f048434d198fda6118922048ce)](https://www.codacy.com/app/terehov-alexander-serg/socatar?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=terales/socatar&amp;utm_campaign=Badge_Grade)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
