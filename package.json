@@ -1,6 +1,6 @@
 {
   "name": "socatar",
-  "version": "1.0.97",
+  "version": "1.0.98",
   "description": "Web service for easily requesting profile photos from several sources",
   "main": "src/server.js",
   "scripts": {
@@ -26,7 +26,7 @@
     "nodemon": "2.0.3",
     "nyc": "15.0.1",
     "rimraf": "3.0.2",
-    "standard": "14.3.3",
+    "standard": "14.3.4",
     "supertest": "4.0.2"
   },
   "engines": {
