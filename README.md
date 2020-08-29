@@ -6,7 +6,7 @@ You don't need to maintain same implementations for getting user pictures in you
 
 Use in HTML:
 ```html
-<img src="https://socatar.com/twitter/yegor256/50-50" />
+<img src="https://socatar.com/github/terales/50-50" />
 ```
 
 or via API:
@@ -36,14 +36,14 @@ Uptime: [![Uptime](http://www.sixnines.io/b/28f4)](http://www.sixnines.io/h/28f4
 
 ### Currently supported sources
 
-* Facebook with id, like `100001584476227` OR profile slug, like `yegor256`
+* Facebook with id, like `100001584476227` OR profile slug, like `terales`
 * GitHub with login, like `terales`
 * Gravatar with email
-* Twitter with username, like `robwormald`
 
 #### Deprecated
 
 * Google with Google+ id, like `+SriramSaroop` OR gmail address
+* Twitter with username, like `robwormald`
 
 ### Resize images with Cloudinary
 
@@ -51,18 +51,18 @@ Thanks to the Cloudinary generous limits we are able to resize images from any s
 Just prepend required width and height to the image url:
 
 ```
-https://socatar.com/twitter/yegor256/50-50
-                             width - ^^ ^^ - height
+https://socatar.com/github/terales/50-50
+                           width - ^^ ^^ - height
 ```
 
-If you omit size (ex. `https://socatar.com/twitter/yegor256`) than 100×100 image would be served. For you custom deployment you can modify it via environment variables, see [`.env-template`](.env-template).
+If you omit size (ex. `https://socatar.com/github/terales`) than 100×100 image would be served. For you custom deployment you can modify it via environment variables, see [`.env-template`](.env-template).
 
 When Cloudinary integration is enabled Socatar.com will get the url of required image
 and redirect it to Cloudinary fetch with transformations applied.
 
 Get an original image with a special `original` size:
 ```
-https://socatar.com/twitter/yegor256/original
+https://socatar.com/github/terales/original
 ```
 
 ### Getting help
