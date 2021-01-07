@@ -1,6 +1,6 @@
 {
   "name": "socatar",
-  "version": "1.0.107",
+  "version": "1.0.108",
   "description": "Web service for easily requesting profile photos from several sources",
   "main": "src/server.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "streamsearch": "0.1.2"
   },
   "devDependencies": {
-    "ava": "3.14.0",
+    "ava": "3.15.0",
     "codacy-coverage": "3.4.0",
     "coveralls": "3.1.0",
     "nodemon": "2.0.7",
