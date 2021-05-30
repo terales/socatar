@@ -1,6 +1,6 @@
 {
   "name": "socatar",
-  "version": "1.0.123",
+  "version": "1.0.124",
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
@@ -1627,9 +1627,9 @@
       }
     },
     "cloudinary": {
-      "version": "1.25.1",
-      "resolved": "https://registry.npmjs.org/cloudinary/-/cloudinary-1.25.1.tgz",
-      "integrity": "sha512-8iyMyOrRhRudJabdNc34GU/Vnr/ltDRq8gmkwQ4NpuJ1lD5Qw88DJGBNeODZnGSNXIPTLln708gsADVKe0AQMw==",
+      "version": "1.25.2",
+      "resolved": "https://registry.npmjs.org/cloudinary/-/cloudinary-1.25.2.tgz",
+      "integrity": "sha512-HlGxLdE1Q5mq/RlUIXmh4EroahwEnk27bu9j7T+2bjnSy6lmTBvxxYkTauZ2bJyKCbd4D1JhVACrBSrL8JmWxQ==",
       "requires": {
         "cloudinary-core": "^2.10.2",
         "core-js": "3.6.5",
@@ -1638,9 +1638,9 @@
       }
     },
     "cloudinary-core": {
-      "version": "2.11.3",
-      "resolved": "https://registry.npmjs.org/cloudinary-core/-/cloudinary-core-2.11.3.tgz",
-      "integrity": "sha512-ZRnpjSgvx+LbSf+aEz5NKzxDB4Z0436aY/0BSDa90kAHiwAyd84VyEi95I74SE80e15Ri9t5S2xtksTXpzk9Xw=="
+      "version": "2.11.4",
+      "resolved": "https://registry.npmjs.org/cloudinary-core/-/cloudinary-core-2.11.4.tgz",
+      "integrity": "sha512-F1BZczD6f5mB73D0c8gl/iuacVQQO+UhckNZxeeS9ZIVeIHbsfqwWiAZMQmIvEb7Wti/9MLU0xVwaWOak2THHA=="
     },
     "codacy-coverage": {
       "version": "3.4.0",
