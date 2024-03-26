@@ -12,7 +12,7 @@
   "dependencies": {
     "cloudinary": "1.26.0",
     "dotenv": "10.0.0",
-    "express": "4.17.1",
+    "express": "4.19.2",
     "lodash.get": "4.4.2",
     "lodash.set": "4.3.2",
     "raven": "2.6.4",
