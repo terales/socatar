@@ -1,4 +1,4 @@
-### [Socatar.com](https://socatar.com/)
+### [Socatar.com](https://socatar.com/) [ARCHIVED]
 
 Web service for easily use profile photos on your web page.
 
